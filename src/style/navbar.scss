@@ -3,3 +3,40 @@
         width: 300px;
     }
 }
+
+.navbar {
+    select {
+        border: none; border-right: 1px solid var(--dark-grey); 
+        outline: none; appearance: none;
+        padding: 0 1rem;
+        background: unset;
+    }
+    select, option {
+        text-transform: uppercase; 
+    }
+}
+
+.search-field {
+    border-radius: 6px;
+    display: flex;  width: 800px;
+    align-items: center; background: var(--light-grey);
+    .input-group {
+        background: var(--grey);
+        border: none;
+        padding: .25rem; border-radius: 0 6px 6px 0;
+        input, .input-group-text {
+            border: none;
+            background: unset;
+        }
+        .input-group-text {
+            border-radius: 6px;
+        }
+    }
+}
+
+.navbar-icons {
+    flex: auto; justify-content: space-around;
+    max-width: 150px;
+    font-size: 25px;
+}
+
