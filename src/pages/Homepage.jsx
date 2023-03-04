@@ -9,13 +9,11 @@ export default function Homepage () {
                     </div>
                 </div>
             </section>
-            <section className="explore-section">
-                <div className="heading">
-                    <span>
-                        <h1>Explore Categories | </h1>
-                        <p>See All</p>
-                    </span>
-                </div>
+            <section className="explore-section p-5">
+                <span className="heading">
+                    <h1>Explore Categories | </h1>
+                    <p>See All</p>
+                </span>
                 <div className="category-section">
                     <div>Fruits & Vegetables</div>
                     <div>Frozen Seafoods</div>
@@ -28,17 +26,25 @@ export default function Homepage () {
             <div className="promo-banner container">
                 <div className="row">
                     <div className="col-lg-3">
-                        20% off
+                        <div className="promo-details">
+                            <p className="small">20% off</p>
+                            <h3>Almond Breeze</h3>
+                            <p>March 28 - April 4</p>
+                        </div>
                     </div>
                     <div className="col-lg-6">
                         Almond Breeze
                     </div>
                     <div className="col-lg-3">
-                        Easter Sale
+                        <div className="deals">
+                            <h4>Easter Sale</h4>
+                            <p>100% made from almonds, full of nutrients and less calories than normal milk</p>
+                            <button>Shop Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <section className="deals-section">
+            <section className="deals-section p-5">
                 <span className="heading">
                     <h1>Popular Deals | </h1>
                     <p>See All {'->'}</p>
