@@ -4,9 +4,19 @@
     }
 }
 
+header {
+    .main {
+        border-bottom: .5px solid var(--dark-grey);
+    }
+}
+
+.shop-navbar {
+    width: 500px;
+}
+
 .navbar {
     select {
-        border: none; border-right: 1px solid var(--dark-grey); 
+        border: none;
         outline: none; appearance: none;
         padding: 0 1rem;
         background: unset;
@@ -17,9 +27,16 @@
 }
 
 .search-field {
-    border-radius: 6px;
-    display: flex;  width: 800px;
-    align-items: center; background: var(--light-grey);
+    border-radius: 6px;  width: 800px;
+    background: var(--light-grey);
+    span {
+        border: none; border-right: 1px solid var(--dark-grey); 
+        &::after {
+            font: var(--fa-font-solid); content: '\f078';
+            position: relative; right: 2.5rem;
+            pointer-events: none;
+        }
+    }
     .input-group {
         background: var(--grey);
         border: none;
@@ -35,7 +52,7 @@
 }
 
 .navbar-icons {
-    flex: auto; justify-content: space-around;
+    flex: auto;
     max-width: 150px;
     font-size: 25px;
 }
