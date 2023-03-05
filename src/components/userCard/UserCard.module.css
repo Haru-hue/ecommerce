@@ -1,0 +1,78 @@
+.userCard {
+  border-radius: var(--border-radius);
+  text-align: center;
+  min-width: 15rem;
+  max-width: 20rem;
+  box-shadow: var(--box-shadow);
+}
+
+.borderB {
+  border-bottom: 0.3rem solid #d9d9d9;
+}
+
+.info {
+  padding: 1.25rem 0;
+}
+
+.name {
+  margin: 0;
+  margin-top: 1.25rem;
+}
+
+.mt {
+  margin-top: 1.25rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding: 1.25rem;
+}
+
+.availability {
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.availabilityTitle {
+  color: #747474;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5625rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.availabilityText {
+  margin: 0;
+  margin-top: 0.125rem;
+}
+
+.avatar {
+  border-radius: 50%;
+  display: block;
+  height: 150px;
+  margin: 0 auto;
+  width: 150px;
+}
+
+.nav {
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.navLink {
+  color: #000;
+  text-decoration: none;
+}
+
+.settings {
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.postAnAd {
+  padding: 1.25rem;
+  font-weight: 600;
+}
