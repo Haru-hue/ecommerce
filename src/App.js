@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Footer from "./components/Footer";
 import Homepage from "./pages/Homepage";
+import Components from "./pages/Components";
 import Navbar from "./components/Navbar";
 import Modal from "./pages/SignInModal";
 import ProductPage from "./views/ProductPage";
@@ -22,6 +23,9 @@ function App() {
           {/* Product routes */}
           <Route path="/products" element={<ProductPage />} exact />
           <Route path="/my-account" element={<Profile />} exact />
+
+          {/* Dummy route to showcase component */}
+          <Route path="/components" element={<Components />} exact />
         </Routes>
         <Footer />
       </Router>
