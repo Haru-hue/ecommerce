@@ -1,6 +1,26 @@
-@use './style/navbar.scss';
+@use "./style/navbar.scss";
 
 :root {
+  --bg-color-primary: #70d2b6;
+  --bg-color-primary-darker: #51b4a2;
+  --bg-color-secondary: #fac251;
+  --bg-color-secondary-darker: #d79e3b;
+  --bg-color-tertiary: #d9d9d9;
+  --bg-color-tertiary-darker: #bebebe;
+
+  --text-color-primary: #fff;
+  --text-color-secondary: #2c4a6f;
+  --text-color-tertiary: #000;
+
+  --text-size-sm: 0.85rem;
+  --text-size-md: 1rem;
+  --text-size-lg: 1.125rem;
+
+  --border-radius: 0.9375rem;
+  --btn-border-radius: 0.625rem;
+
+  --box-shadow: 0px 5px 13px rgba(0, 0, 0, 0.25);
+
   --dark-grey: #535353;
   --grey: #d9d9d9;
   --light-grey: #f3f3f3;
