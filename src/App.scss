@@ -1,4 +1,5 @@
 @use "./style/navbar.scss";
+@use "./style/homepage.scss";
 
 :root {
   --bg-color-primary: #70d2b6;
@@ -26,6 +27,10 @@
   --light-grey: #f3f3f3;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 /*Navbar and Footer hide*/
 .hidden {
   display: none;
@@ -34,3 +39,4 @@
 .separator {
   margin: 1rem;
 }
+

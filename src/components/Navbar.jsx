@@ -1,4 +1,5 @@
 import { useLocation } from "react-router"
+import Button from "../components/button/index";
 import Logo from '../images/Logo.png'
 
 export default function Navbar () {
@@ -43,11 +44,12 @@ export default function Navbar () {
                     </div>
                 </nav>
             </div>
-            <nav className="navbar px-5">
+            <nav className="navbar p-4">
                 <div className="shop-navbar d-flex align-items-center justify-content-around">
-                    <button className="shop-toggler" type="button" data-bs-toggle="collapse" data-bs-target="" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
+                    <Button className="shop-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="" aria-controls="" aria-expanded="false" aria-label="Toggle navigation" size="sm">
                         <span class="navbar-toggler-icon"></span> Shop by Category
-                    </button>
+                    </Button>
                     <h6>
                         <span><i class="fa-solid fa-bolt"></i></span>
                         Today's Deals
@@ -58,7 +60,7 @@ export default function Navbar () {
                     </h6>
                 </div>
                 <ul className="navbar-nav">
-                    <h6>
+                    <h6 className="d-flex align-items-center">
                         <span><i class="fa-solid fa-arrows-rotate"></i></span>
                         Recently Viewed
                     </h6>

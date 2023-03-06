@@ -1,0 +1,15 @@
+.carousel-item {
+    background-size: cover;  background-position: center;
+    background-repeat: no-repeat;
+    &:nth-child(1) {
+        background-image: url('../images/slider-image1.jpg');
+    }
+    &:nth-child(2) {
+        background-image: url('../images/slider-image2.jpg');
+    }
+}
+
+.homepage-slider, .bg-section {
+    background: url('../images/bg.jpg') no-repeat;
+}
+

@@ -1,0 +1,23 @@
+@use './images';
+
+.carousel-item, .slider-box, .promo-banner {
+    height: 450px; border-radius: var(--border-radius);
+}
+
+.slider-box { background: #37A59A; }
+.heading { max-width: 400px; }
+.promo-banner { background: #6ED1B6; padding: 5rem;
+    img { width: 400px }
+}
+
+.category-section {
+    display: grid;  grid-template-columns: repeat(6, 1fr);
+    div:nth-child(5) > .category-img img { transform: rotate(45deg);  }
+}
+
+.category-img {
+    background: #F7F7F6;
+    img {  width: 200px; height: 200px; object-fit: contain;  }
+}
+
+.deals-grid { max-width: 1650px; } .deal-box { width: 33.3%;}

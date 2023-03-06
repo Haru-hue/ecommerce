@@ -8,7 +8,7 @@ import Modal from "./pages/SignInModal";
 import ProductPage from "./views/ProductPage";
 import Profile from "./views/UserProfile";
 
-import "normalize.css";
+// import "normalize.css";
 import "./App.scss";
 
 function App() {
