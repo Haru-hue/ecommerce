@@ -23,11 +23,11 @@ const UserProfile = () => (
       <p className="separator">
         <h4>Visitor</h4>
         <hr />
-        <UserCard isOwner={false} user={dummyUser} />
+        <UserCard isOwner={false} {...dummyUser} />
         <br />
         <hr />
         <h4>Owner</h4>
-        <UserCard isOwner={true} user={dummyUser} />
+        <UserCard isOwner={true} {...dummyUser} />
       </p>
     </details>
     <hr />
