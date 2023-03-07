@@ -6,7 +6,7 @@ import Components from "./pages/Components";
 import Navbar from "./components/Navbar";
 import Modal from "./pages/SignInModal";
 import ProductPage from "./views/ProductPage";
-import Profile from "./views/UserProfile";
+import UserProfile from "./views/UserProfile";
 
 // import "normalize.css";
 import "./App.scss";
@@ -22,7 +22,8 @@ function App() {
 
           {/* Product routes */}
           <Route path="/products" element={<ProductPage />} exact />
-          <Route path="/my-account" element={<Profile />} exact />
+          <Route path="/products" element={<ProductPage />} exact />
+          <Route path="/profiles/:userId" element={<UserProfile />} exact />
 
           {/* Dummy route to showcase component */}
           <Route path="/components" element={<Components />} exact />
