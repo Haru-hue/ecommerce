@@ -1,6 +1,6 @@
 import * as React from "react";
 import { HTMLAttributes, PropsWithChildren } from "react";
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 type ButtonColor = "primary" | "secondary" | "tertiary";
 
