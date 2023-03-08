@@ -1,18 +1,13 @@
 .navbar-brand {
-    img {
-        width: 300px;
-    }
+    img {  width: 300px;  }
 }
 
 header {
-    .main {
-        border-bottom: .5px solid var(--dark-grey);
-    }
+    .main {  border-bottom: .5px solid var(--dark-grey);   }
 }
 
-.shop-navbar {
-    width: 500px;
-}
+.shop-navbar { width: 650px; }
+.shop-toggler { padding: 0.75em; }
 
 .navbar {
     select {

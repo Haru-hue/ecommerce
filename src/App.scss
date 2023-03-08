@@ -1,5 +1,6 @@
 @use "./style/navbar.scss";
 @use "./style/homepage.scss";
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 
 :root {
   --bg-color-primary: #70d2b6;
@@ -25,10 +26,13 @@
   --dark-grey: #535353;
   --grey: #d9d9d9;
   --light-grey: #f3f3f3;
+
+  --primary-text: 'Mulish', sans-serif;
 }
 
 body {
   overflow-x: hidden;
+  font-family: var(--primary-text);
 }
 
 /*Navbar and Footer hide*/
@@ -40,3 +44,6 @@ body {
   margin: 1rem;
 }
 
+ul { list-style-type: none; padding-left: 0;}
+
+.w-40 { width: 40% } .fs-0 { font-size: 4rem; }

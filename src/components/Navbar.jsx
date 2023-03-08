@@ -44,23 +44,23 @@ export default function Navbar () {
                     </div>
                 </nav>
             </div>
-            <nav className="navbar p-4">
+            <nav className="navbar px-5 py-3">
                 <div className="shop-navbar d-flex align-items-center justify-content-around">
-                    <Button className="shop-toggler" type="button" data-bs-toggle="collapse" 
+                    <Button className="shop-toggler fs-5 text-uppercase" type="button" data-bs-toggle="collapse" 
                     data-bs-target="" aria-controls="" aria-expanded="false" aria-label="Toggle navigation" size="sm">
                         <span class="navbar-toggler-icon"></span> Shop by Category
                     </Button>
-                    <h6>
+                    <h6 className="fw-bold">
                         <span><i class="fa-solid fa-bolt"></i></span>
                         Today's Deals
                     </h6>
-                    <h6>
+                    <h6 className="fw-bold">
                         <span><i class="fa-solid fa-tag"></i></span>
                         Special Discounts
                     </h6>
                 </div>
                 <ul className="navbar-nav">
-                    <h6 className="d-flex align-items-center">
+                    <h6 className="d-flex align-items-center fw-bold">
                         <span><i class="fa-solid fa-arrows-rotate"></i></span>
                         Recently Viewed
                     </h6>

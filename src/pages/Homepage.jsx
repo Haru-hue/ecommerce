@@ -9,6 +9,7 @@ import bread from '../images/bread.png'
 import alb from '../images/almond-breeze.png'
 import DealBox from "../components/deal-box";
 import Slider from "react-slick";
+import milk from "../images/milk.png";
 
 export default function Homepage () {
     const settings = {
@@ -34,21 +35,21 @@ export default function Homepage () {
                 <div className="container-fluid">
                     <div className="row gx-5 p-5">
                         <div className="col-lg-9">
-                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-interval="false">
                                 <div className="carousel-inner">
                                     <div className="carousel-item active p-5">
                                         <div className="text-red pb-5">
-                                            <h2>Fresh New Fruits Available</h2>
-                                            <p>New arrivals with fruits in season, essential for the spring</p>
+                                            <h1 className="fs-0 w-40 fw-bold">Fresh New Fruits Available</h1>
+                                            <p className="fs-5 w-25">New arrivals with fruits in season, essential for the spring</p>
                                         </div>
-                                        <Button size="sm" className="shop-button pt-5">Shop Now</Button>
+                                        <Button size="md" className="shop-button">Shop Now</Button>
                                     </div>
                                     <div className="carousel-item p-5">
                                         <div className="text-brown pb-5">
-                                            <h2>Freshly Baked Goods</h2>
-                                            <p>Fresh from the oven, local farmers use fresh ingredients for the bread</p>
+                                            <h2 className="fs-0 w-40 fw-bold">Freshly Baked Goods</h2>
+                                            <p className="fs-5 w-25">Fresh from the oven, local farmers use fresh ingredients for the bread</p>
                                         </div>
-                                        <Button size="sm" className="shop-button pt-5">Shop Now</Button>
+                                        <Button size="md" className="shop-button mt-4 fw-bold">Shop Now</Button>
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -64,9 +65,9 @@ export default function Homepage () {
                         <div className="col-lg-3">
                             <div className="slider-box overflow-hidden">
                                 <div className="text-light p-4">
-                                    <h2>GOT PRODUCTS TO SELL</h2>
+                                    <h2 className="fw-bold">GOT PRODUCTS TO SELL</h2>
                                     <p>Post an advert to sell now, let us help you reach customers </p>
-                                    <Button size="sm" className="shop-button pt-5">Sell Now</Button>
+                                    <Button size="sm" className="shop-button mt-5">Sell Now</Button>
                                 </div>
                                 <img src={farmer} alt="" className="img-fluid ms-4 mt-5" />
                             </div>
@@ -112,26 +113,54 @@ export default function Homepage () {
                 <div className="deals-grid ">
                     <Slider {...settings}>
                         <DealBox color="orange">
-                            <h2>100% Pure Orange Juice</h2>
-                            <p>Fresh orange juice with no added preservatives</p>
+                            <div className="row">
+                                <div className="col-lg-8">
+                                    <h2>100% Pure Orange Juice</h2>
+                                    <p>Fresh orange juice with no added preservatives</p>
+                                </div>
+                                <div className="col-lg-4">
+                                    <img src="https://i.imgur.com/kB2iRQx.png" alt="orange" className="img-fluid"/>
+                                </div>
+                            </div>
                         </DealBox>
                         <DealBox color="salmon">
-                            <span>
-                                <h2>₦2,500.00</h2>
-                                <s>₦4,500.00</s>
-                            </span>
-                            <h6>CANNED FISH SALMON</h6>
-                            <p>250g</p>
+                            <div className="row">
+                                <div className="col-lg-8">
+                                    <span>
+                                        <h2>₦2,500.00</h2>
+                                        <s>₦4,500.00</s>
+                                    </span>
+                                    <h6>CANNED FISH SALMON</h6>
+                                    <p>250g</p>
+                                </div>
+                                <div className="col-lg-4">
+                                    <img src="https://i.imgur.com/4dJuDn5.png" alt="" className="img-fluid" />
+                                </div>
+                            </div>
                         </DealBox>
                         <DealBox color="pink">
-                            <h2>whole milk</h2>
-                            <p>Fresh milk and lactose-free providing all the ingredients</p>
-                            <h3>ONLY
-                            ₦1,800.00</h3>
+                            <div className="row">
+                                <div className="col-lg-8">
+                                    <h2>whole milk</h2>
+                                    <p>Fresh milk and lactose-free providing all the ingredients</p>
+                                    <h3>ONLY
+                                    ₦1,800.00</h3>
+                                </div>
+                                <div className="col-lg-4">
+                                    <img src={milk} alt="" className="img-fluid" />
+                                </div>
+                            </div>
                         </DealBox>
                         <DealBox color="brown">
-                            <h2>Wheat Bread</h2>
-                            <p>Whole-grain wheat bread, freshly-baked</p>
+                            <div className="row">
+                                <div className="col-lg-8">
+                                    <h2>Wheat Bread</h2>
+                                    <p>Whole-grain wheat bread, freshly-baked</p>
+                                </div>
+                                <div className="col-lg-4">
+                                    <img src="https://i.imgur.com/ZVUhFI4.png" alt="" className="img-fluid" />
+                                </div>
+                            </div>
                         </DealBox>
                     </Slider>
                 </div>
@@ -147,41 +176,45 @@ export default function Homepage () {
                     <div>Bread and Pastries</div>
                     <div>Raw Meats</div>
                 </div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-7">
+                <div className="container-fluid">
+                    <div className="row px-5">
+                        <div className="col-lg-8">
                             <div className="d-flex flex-column">
-                                <div className="deals-box">
-                                    <div className="deal-text">
-                                        <h3>YOUR EVERYDAY ITEMS DELIVERED AT YOUR DOORSTEP</h3>
-                                        <h1>For Free</h1>
-                                        <p>Terms and Conditions Apply</p>
-                                    </div>
+                              <DealBox color="dark-orange">
+                                <div className="deal-text">
+                                    <h3>YOUR EVERYDAY ITEMS DELIVERED AT YOUR DOORSTEP</h3>
+                                    <h1>For Free</h1>
+                                   <p>Terms and Conditions Apply</p>
                                 </div>
-                                <div className="deals-box">
+                                <img src="https://i.imgur.com/MAjy2h8.png" alt="" className="img-fluid" />
+                              </DealBox>
+                                <DealBox color="green">
                                     <h3>GROCERY SUPER DEALS</h3>
                                     <h5>Save more on your groceries</h5>
-                                </div>
+                                    <img src="https://i.imgur.com/9oB1oOH.png" alt="" className="img-fluid" />
+                                </DealBox>
                             </div>
                         </div>
-                        <div className="col-lg-5">
-                            <h2>15% OFF</h2>
-                            <h3>For new users, sign up for this exclusive promo</h3>
-                            <form action="" method="post">
-                                <div className="input-group">
-                                    <span className="input-group-text"><i className="fa-regular fa-envelope"></i></span>
-                                    <input type="email" name="" id="" placeholder="Email address" className="form-control"/>
-                                </div>
-                                <div className="input-group">
-                                    <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
-                                    <input type="password" name="" id="" placeholder="Password" className="form-control"/>
-                                </div>
-                                <div className="input-group">
-                                    <span className="input-group-text"><i className="fa-solid fa-repeat"></i></span>
-                                    <input type="password" name="" id="" placeholder="Confirm Password" className="form-control"/>
-                                </div>
-                                <button type="submit" className="btn-register">Register Now</button>
-                            </form>
+                        <div className="col-lg-4">
+                            <DealBox className='with-bg d-flex flex-column text-center'>
+                                <h2>15% OFF</h2>
+                                <h3>For new users, sign up for this exclusive promo</h3>
+                                <form action="" method="post" className="d-flex flex-column align-items-center">
+                                    <div className="input-group py-2 w-75">
+                                        <span className="input-group-text"><i className="fa-regular fa-envelope"></i></span>
+                                        <input type="email" name="" id="" placeholder="Email address" className="form-control p-3"/>
+                                    </div>
+                                    <div className="input-group py-2 w-75">
+                                        <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                                        <input type="password" name="" id="" placeholder="Password" className="form-control p-3"/>
+                                    </div>
+                                    <div className="input-group py-2 w-75">
+                                        <span className="input-group-text"><i className="fa-solid fa-repeat"></i></span>
+                                        <input type="password" name="" id="" placeholder="Confirm Password" className="form-control p-3"/>
+                                    </div>
+                                    <button type="submit" className="btn-register">Register Now</button>
+                                </form>
+                            </DealBox>
                         </div>
                     </div>
                 </div>

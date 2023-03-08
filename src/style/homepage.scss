@@ -16,8 +16,19 @@
 }
 
 .category-img {
-    background: #F7F7F6;
+    background: #F7F7F6; border-radius: 0.5rem;
     img {  width: 200px; height: 200px; object-fit: contain;  }
 }
 
-.deals-grid { max-width: 1650px; } .deal-box { width: 33.3%;}
+.deals-grid { max-width: 1650px; }
+.title-grid { max-width: 1000px; }
+
+.service {
+    span { display: inline-block; margin-right: 10px; } p { padding-left: 2rem; }
+}
+
+.homepage-slider {
+    .carousel-control-next, .carousel-control-prev { background: aqua; opacity: 1; 
+        padding: 10px; top: unset; bottom: 1.5rem; width: 1%; border-radius: 0.5rem;}
+    .carousel-control-prev {right: 5rem; left: unset;} .carousel-control-next {right: 1rem; }
+}

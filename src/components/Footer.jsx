@@ -1,35 +1,40 @@
 import { useLocation } from "react-router"
+import playBadge from "../images/Google_Play_Store_badge.png"
 
 export default function Footer () {
     const location = useLocation()
     const isHidden = location.pathname.startsWith('/user') ? 'hidden' : ''
     return (
-        <footer className="container">
+        <footer className="container-fluid p-5">
             <div className={`footer ${isHidden}`}>
-                <ul className="services-section">
+                <ul className="services-section d-flex justify-content-around">
                     <li className="service">
-                        <h4>
-                            <span>Icon</span>
-                            Shop with Confidence</h4>
-                        <p>We got you covered</p>
+                    <i class="fa-solid fa-shield"></i>
+                        <span>
+                            <h4>Shop with Confidence</h4>
+                            <p>We got you covered</p>
+                        </span>
                     </li>
                     <li className="service">
-                        <h4>
-                            <span>Icon</span>
-                        Great Offers</h4>
-                        <p>Discounted items up to 70%</p>
+                    <i class="fa-solid fa-tags"></i>
+                        <span>
+                            <h4>Great Offers</h4>
+                            <p>Discounted items up to 70%</p>
+                        </span>
                     </li>
                     <li className="service">
-                        <h4>
-                            <span>Icon</span>
-                            Become a Seller</h4>
-                        <p>Make money with our help</p>
+                    <i class="fa-solid fa-money-bill-1-wave"></i>
+                        <span>
+                            <h4>Become a Seller</h4>
+                            <p>Make money with our help</p>
+                        </span>
                     </li>
                     <li className="service">
-                        <h4>
-                            <span>Icon</span>
-                            24/7 Customer Support</h4>
-                        <p>Round-the-clock assistance</p>
+                        <i class="fa-solid fa-user-group"></i>
+                        <span>
+                            <h4>24/7 Customer Support</h4>
+                            <p>Round-the-clock assistance</p>
+                        </span>
                     </li>
                 </ul>
                 <div className="footer-bottom">
@@ -42,20 +47,20 @@ export default function Footer () {
                             <ul>
                                 <li>
                                     <p>
-                                        <span>Icon</span>
+                                        <span><i class="fa-solid fa-phone"></i></span>
                                         Hotline:
                                     </p>
                                     <h3>+234 (705) 923 0778</h3>
                                 </li>
                                 <li>
                                     <p>
-                                        <span>Icon</span>
+                                        <span><i class="fa-solid fa-phone"></i></span>
                                         Babcock University
                                     </p>
                                 </li>
                                 <li>
                                     <p>
-                                        <span>Icon</span>
+                                        <span><i class="fa-solid fa-envelope"></i></span>
                                         ukojoshy@gmail.com
                                     </p>
                                 </li>
@@ -86,7 +91,9 @@ export default function Footer () {
                         </div>
                         <div className="col-lg-2">
                             <h5>Resources</h5>
-                            <div className="play-icon">Google Playstore</div>
+                            <div className="play-icon">
+                                <img src={playBadge} alt="" className="img-fluid"/>
+                            </div>
                         </div>
                     </div>
                 </div>
