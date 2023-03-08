@@ -1,22 +1,22 @@
 import Button from "../button";
-import styles from "./UserCard.module.css";
+import styles from "./UserCard.module.scss";
 
-interface User {
+interface Props {
   availability: string;
   id: string;
   imageUrl?: string;
+  isOwner: boolean;
   name: string;
 }
 
-interface Props {
-  isOwner: boolean;
-  user: User;
-}
-
 // User object should be read from context or staticProps
-export const UserCard = ({ isOwner, user }: Props) => {
-  const { availability, imageUrl, name, id } = user;
-
+export const UserCard = ({
+  availability,
+  imageUrl,
+  name,
+  id,
+  isOwner,
+}: Props) => {
   return (
     <section className={styles.userCard}>
       <div className={`${styles.info} ${styles.borderB}`}>
