@@ -1,6 +1,7 @@
 @use "./style/navbar.scss";
+@use "./style/utilities";
 @use "./style/homepage.scss";
-@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Righteous&family=Rock+Salt&display=swap');
 
 :root {
   --bg-color-primary: #70d2b6;
@@ -13,11 +14,13 @@
   --text-color-primary: #fff;
   --text-color-secondary: #2c4a6f;
   --text-color-tertiary: #000;
+  --text-color-grey: #747474;
 
   --text-size-sm: 0.85rem;
   --text-size-md: 1rem;
   --text-size-lg: 1.125rem;
 
+  --radius: 0.5rem;
   --border-radius: 0.9375rem;
   --btn-border-radius: 0.625rem;
 
@@ -27,7 +30,10 @@
   --grey: #d9d9d9;
   --light-grey: #f3f3f3;
 
+  --red: #C22A2A;
+
   --primary-text: 'Mulish', sans-serif;
+  --font-text: var(--fa-font-solid);
 }
 
 body {
@@ -36,14 +42,4 @@ body {
 }
 
 /*Navbar and Footer hide*/
-.hidden {
-  display: none;
-}
-
-.separator {
-  margin: 1rem;
-}
-
-ul { list-style-type: none; padding-left: 0;}
-
-.w-40 { width: 40% } .fs-0 { font-size: 4rem; }
+.separator {  margin: 1rem; }

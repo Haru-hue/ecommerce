@@ -1,6 +1,10 @@
-.carousel-item {
+@mixin bg {
     background-size: cover;  background-position: center;
     background-repeat: no-repeat;
+}
+
+.carousel-item {
+    @include bg();
     &:nth-child(1) {
         background-image: url('../images/slider-image1.jpg');
     }
@@ -10,6 +14,7 @@
 }
 
 .homepage-slider, .bg-section {
-    background: url('../images/bg.jpg') no-repeat;
+    background: url('../images/bg.jpg');
 }
 
+.with-bg { background-image: url('../images/bg2.jpg'); @include bg() }

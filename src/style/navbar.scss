@@ -30,7 +30,7 @@ header {
     span {
         border: none; border-right: 1px solid var(--dark-grey); 
         &::after {
-            font: var(--fa-font-solid); content: '\f078';
+            font: var(--font-text); content: '\f078';
             position: relative; right: 2.5rem;
             pointer-events: none;
         }
