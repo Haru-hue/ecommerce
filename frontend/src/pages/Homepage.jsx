@@ -22,9 +22,9 @@ export default function Homepage () {
             </div>
         )
     })
-
     return (
         <main>
+            
             <section className="homepage-slider bg-section">
                 <div className="container-fluid">
                     <div className="row gx-5 p-5">
