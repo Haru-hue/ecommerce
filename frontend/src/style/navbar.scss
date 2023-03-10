@@ -1,57 +1,72 @@
 .navbar-brand {
-    img {  width: 300px;  }
+  img {
+    width: 300px;
+  }
 }
 
 header {
-    .main {  border-bottom: .5px solid var(--dark-grey);   }
+  .main {
+    border-bottom: 0.5px solid var(--dark-grey);
+  }
 }
 
-.shop-navbar { width: 650px; }
-.shop-toggler { padding: 0.75em; }
+.shop-navbar {
+  width: 650px;
+}
+.shop-toggler {
+  padding: 0.75em;
+}
 
 .navbar {
-    select {
-        border: none;
-        outline: none; appearance: none;
-        padding: 0 1rem;
-        background: unset;
-    }
-    select, option {
-        text-transform: uppercase; 
-    }
-    h6 > span {
-        padding-right: .5rem;
-    }
+  select {
+    border: none;
+    outline: none;
+    appearance: none;
+    padding: 0 1rem;
+    background: unset;
+  }
+  select,
+  option {
+    text-transform: uppercase;
+  }
+  h6 > span {
+    padding-right: 0.5rem;
+  }
 }
 
 .search-field {
-    border-radius: 6px;  width: 800px;
-    background: var(--light-grey);
-    span {
-        border: none; border-right: 1px solid var(--dark-grey); 
-        &::after {
-            font: var(--font-text); content: '\f078';
-            position: relative; right: 2.5rem;
-            pointer-events: none;
-        }
+  border-radius: 6px;
+  width: 800px;
+  background: var(--light-grey);
+  span {
+    border: none;
+    border-right: 1px solid var(--dark-grey);
+    &::after {
+      font: var(--font-text);
+      content: "\f078";
+      position: relative;
+      right: 2.5rem;
+      pointer-events: none;
     }
-    .input-group {
-        background: var(--grey);
-        border: none;
-        padding: .25rem; border-radius: 0 6px 6px 0;
-        input, .input-group-text {
-            border: none;
-            background: unset;
-        }
-        .input-group-text {
-            border-radius: 6px;
-        }
+  }
+  .input-group {
+    background: var(--grey);
+    border: none;
+    padding: 0.25rem;
+    border-radius: 0 6px 6px 0;
+    input,
+    .input-group-text {
+      border: none;
+      background: unset;
     }
+    .input-group-text {
+      border-radius: 6px;
+    }
+  }
 }
 
 .navbar-icons {
-    flex: auto;
-    max-width: 150px;
-    font-size: 23px;
+  flex: auto;
+  max-width: 150px;
+  font-size: 23px;
 }
-

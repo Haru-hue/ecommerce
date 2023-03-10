@@ -7,19 +7,19 @@
 .carousel-item {
   @include bg();
   &:nth-child(1) {
-    background-image: url("../assets/images/slider-image1.jpg");
+    background-image: url("./slider-image1.jpg");
   }
   &:nth-child(2) {
-    background-image: url("../assets/images/slider-image2.jpg");
+    background-image: url("./slider-image2.jpg");
   }
 }
 
 .homepage-slider,
 .bg-section {
-  background: url("../assets/images/bg.jpg");
+  background: url("./bg.jpg");
 }
 
 .with-bg {
-  background-image: url("../assets/images/bg2.jpg");
+  background-image: url("./bg2.jpg");
   @include bg();
 }

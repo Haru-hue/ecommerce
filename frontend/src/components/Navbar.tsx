@@ -1,19 +1,13 @@
-import { useLocation } from "react-router";
-import Button from "../components/button/index";
-import { Logo } from "../assets/images";
-import {
-  ArrowDownIcon,
-  BoltIcon,
-  CircleQuestionIcon,
-  HeartIcon,
-  MagnifyingGlassIcon,
-  TagIcon,
-  UserIcon,
-} from "../components/icons";
+import { useLocation } from 'react-router'
+
+import { Logo } from '../assets/images'
+
+import Button from './button/index'
+import { ArrowDownIcon, BoltIcon, CircleQuestionIcon, HeartIcon, MagnifyingGlassIcon, TagIcon, UserIcon } from './icons'
 
 export default function Navbar() {
-  const location = useLocation();
-  const isHidden = location.pathname.startsWith("/user") ? "hidden" : "";
+  const location = useLocation()
+  const isHidden = location.pathname.startsWith('/user') ? 'hidden' : ''
 
   return (
     <header className={isHidden}>
@@ -27,7 +21,7 @@ export default function Navbar() {
           <form action="" className="d-flex ps-5" role="search">
             <div className="search-field d-flex align-items-center">
               <span className="d-flex align-items-center">
-                <select defaultValue="" name="" id="" className="cat-field">
+                <select defaultValue="" name="categories" className="cat-field">
                   <option value="">All Categories</option>
                   <option value="1">Fruits & Vegetables</option>
                   <option value="2">Frozen Seafoods</option>
@@ -38,13 +32,7 @@ export default function Navbar() {
                 </select>
               </span>
               <div className="input-group">
-                <input
-                  className="form-control"
-                  type="search"
-                  name=""
-                  id=""
-                  placeholder="Search for products here"
-                />
+                <input className="form-control" type="search" name="search" placeholder="Search for products here" />
                 <div className="input-group-text">
                   <MagnifyingGlassIcon />
                 </div>
@@ -58,8 +46,7 @@ export default function Navbar() {
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+            aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -87,15 +74,14 @@ export default function Navbar() {
             aria-controls=""
             aria-expanded="false"
             aria-label="Toggle navigation"
-            size="sm"
-          >
+            size="sm">
             <span className="navbar-toggler-icon"></span> Shop by Category
           </Button>
           <h6 className="fw-bold">
             <span>
               <BoltIcon />
             </span>
-            Today's Deals
+            Today&apos;s Deals
           </h6>
           <h6 className="fw-bold">
             <span>
@@ -114,5 +100,5 @@ export default function Navbar() {
         </ul>
       </nav>
     </header>
-  );
+  )
 }

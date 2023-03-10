@@ -1,29 +1,20 @@
-import Button from "../components/button";
-import { EnvelopeIcon, LockIcon, RepeatIcon } from "../components/icons";
-import DealBox from "../components/deal-box";
-import {
-  AlmondBreeze,
-  Bread,
-  Dairy,
-  Farmer,
-  Fish,
-  Fruit,
-  Meat,
-  Milk,
-  Wheat,
-} from "../assets/images";
+import Button from '../components/button'
+import DealBox from '../components/deal-box'
+import { EnvelopeIcon, LockIcon, RepeatIcon } from '../components/icons'
+
+import { AlmondBreeze, Bread, Dairy, Farmer, Fish, Fruit, Meat, Milk, Wheat } from '../assets/images'
 
 const grid = [
-  { title: "Fruits & Vegetables", image: Fruit },
-  { title: "Frozen Seafoods", image: Fish },
-  { title: "Dairy Products", image: Dairy },
-  { title: "Wheat and Grains", image: Wheat },
-  { title: "Bread and Pastries", image: Bread },
-  { title: "Raw Meats", image: Meat },
-];
+  { title: 'Fruits & Vegetables', image: Fruit },
+  { title: 'Frozen Seafoods', image: Fish },
+  { title: 'Dairy Products', image: Dairy },
+  { title: 'Wheat and Grains', image: Wheat },
+  { title: 'Bread and Pastries', image: Bread },
+  { title: 'Raw Meats', image: Meat },
+]
 
-export default function Homepage() {
-  const categoryGrid = grid.map((item) => {
+const HomePage = () => {
+  const categoryGrid = grid.map(item => {
     return (
       <div className="d-flex flex-column align-items-center" key={item.title}>
         <div className="category-img">
@@ -31,8 +22,9 @@ export default function Homepage() {
         </div>
         <h5 className="pt-3">{item.title}</h5>
       </div>
-    );
-  });
+    )
+  })
+
   return (
     <main>
       <section className="homepage-slider bg-section">
@@ -43,18 +35,12 @@ export default function Homepage() {
                 id="carouselExampleControls"
                 className="carousel slide"
                 data-bs-ride="false"
-                data-bs-interval="false"
-              >
+                data-bs-interval="false">
                 <div className="carousel-inner">
                   <div className="carousel-item active p-5">
                     <div className="text-red pb-4">
-                      <h1 className="fs-0 w-40 fw-bold">
-                        Fresh New Fruits Available
-                      </h1>
-                      <p className="fs-5 w-35">
-                        New arrivals with fruits in season, essential for the
-                        spring
-                      </p>
+                      <h1 className="fs-0 w-40 fw-bold">Fresh New Fruits Available</h1>
+                      <p className="fs-5 w-35">New arrivals with fruits in season, essential for the spring</p>
                     </div>
                     <Button size="md" className="shop-button">
                       Shop Now
@@ -64,8 +50,7 @@ export default function Homepage() {
                     <div className="text-brown pb-5">
                       <h2 className="fs-0 w-40 fw-bold">Freshly Baked Goods</h2>
                       <p className="fs-5 w-35">
-                        Fresh from the oven, local farmers use fresh ingredients
-                        for the bread
+                        Fresh from the oven, local farmers use fresh ingredients for the bread
                       </p>
                     </div>
                     <Button size="md" className="shop-button">
@@ -77,24 +62,16 @@ export default function Homepage() {
                   className="carousel-control-prev"
                   type="button"
                   data-bs-target="#carouselExampleControls"
-                  data-bs-slide="prev"
-                >
-                  <span
-                    className="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
+                  data-bs-slide="prev">
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span className="visually-hidden">Previous</span>
                 </button>
                 <button
                   className="carousel-control-next"
                   type="button"
                   data-bs-target="#carouselExampleControls"
-                  data-bs-slide="next"
-                >
-                  <span
-                    className="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
+                  data-bs-slide="next">
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
                   <span className="visually-hidden">Next</span>
                 </button>
               </div>
@@ -103,9 +80,7 @@ export default function Homepage() {
               <div className="slider-box overflow-hidden">
                 <div className="text-light p-5">
                   <h1 className="fw-bold w-60">GOT PRODUCTS TO SELL</h1>
-                  <p className="fs-5">
-                    Post an advert to sell now, let us help you reach customers{" "}
-                  </p>
+                  <p className="fs-5">Post an advert to sell now, let us help you reach customers </p>
                   <Button size="sm" className="shop-button mt-5">
                     Sell Now
                   </Button>
@@ -133,19 +108,12 @@ export default function Homepage() {
             </div>
           </div>
           <div className="col-lg-6">
-            <img
-              src={AlmondBreeze}
-              alt="Almond Breeze"
-              className="img-fluid m-auto"
-            />
+            <img src={AlmondBreeze} alt="Almond Breeze" className="img-fluid m-auto" />
           </div>
           <div className="col-lg-3">
             <div className="deals d-flex text-end align-items-end flex-column py-4">
               <h1 className="fs-1 m-0 py-2">Easter Sale</h1>
-              <p className="fs-5 py-2">
-                100% made from almonds, full of nutrients and less calories than
-                normal milk
-              </p>
+              <p className="fs-5 py-2">100% made from almonds, full of nutrients and less calories than normal milk</p>
               <Button className="shop-button mt-4" size="lg" variant="outlined">
                 Shop Now
               </Button>
@@ -163,16 +131,10 @@ export default function Homepage() {
             <div className="row">
               <div className="col-lg-8 p-2">
                 <h2 className="fw-bold">100% Pure Orange Juice</h2>
-                <p className="fs-5">
-                  Fresh orange juice with no added preservatives
-                </p>
+                <p className="fs-5">Fresh orange juice with no added preservatives</p>
               </div>
               <div className="col-lg-4">
-                <img
-                  src="https://i.imgur.com/kB2iRQx.png"
-                  alt="orange"
-                  className="img-fluid"
-                />
+                <img src="https://i.imgur.com/kB2iRQx.png" alt="orange" className="img-fluid" />
               </div>
             </div>
           </DealBox>
@@ -185,18 +147,12 @@ export default function Homepage() {
               <h5 className="pt-3 fw-bold w-75">CANNED FISH SALMON</h5>
               <p className="fw-bold pt-5">250g</p>
             </div>
-            <img
-              src="https://i.imgur.com/4dJuDn5.png"
-              alt=""
-              className="img-fluid"
-            />
+            <img src="https://i.imgur.com/4dJuDn5.png" alt="" className="img-fluid" />
           </DealBox>
           <DealBox color="pink">
             <div className="text-light">
               <h2 className="fw-bold">whole milk</h2>
-              <p className="fs-5 w-75">
-                Fresh milk and lactose-free providing all the ingredients
-              </p>
+              <p className="fs-5 w-75">Fresh milk and lactose-free providing all the ingredients</p>
               <div className="pt-5 fw-bold">
                 ONLY
                 <h3>₦1,800.00</h3>
@@ -207,15 +163,9 @@ export default function Homepage() {
           <DealBox color="brown">
             <div className="text-light py-3">
               <h2 className="fw-bold">Wheat Bread</h2>
-              <p className="fs-5 w-75">
-                Whole-grain wheat bread, freshly-baked
-              </p>
+              <p className="fs-5 w-75">Whole-grain wheat bread, freshly-baked</p>
             </div>
-            <img
-              src="https://i.imgur.com/ZVUhFI4.png"
-              alt=""
-              className="img-fluid"
-            />
+            <img src="https://i.imgur.com/ZVUhFI4.png" alt="" className="img-fluid" />
           </DealBox>
         </div>
       </section>
@@ -236,67 +186,37 @@ export default function Homepage() {
               <div className="d-flex flex-column">
                 <DealBox color="dark-orange">
                   <div className="deal-text text-light">
-                    <h3 className="fw-bolder w-75">
-                      YOUR EVERYDAY ITEMS DELIVERED AT YOUR DOORSTEP
-                    </h3>
+                    <h3 className="fw-bolder w-75">YOUR EVERYDAY ITEMS DELIVERED AT YOUR DOORSTEP</h3>
                     <h1 className="ps-5 text-uppercase w-75">For Free</h1>
-                    <p className="pt-5 mt-3 small">
-                      Terms and Conditions Apply
-                    </p>
+                    <p className="pt-5 mt-3 small">Terms and Conditions Apply</p>
                   </div>
-                  <img
-                    src="https://i.imgur.com/MAjy2h8.png"
-                    alt=""
-                    className="img-fluid position-relative"
-                  />
+                  <img src="https://i.imgur.com/MAjy2h8.png" alt="" className="img-fluid position-relative" />
                 </DealBox>
                 <DealBox color="green">
                   <div className="flex-column text-light">
                     <h1 className="fw-bolder">GROCERY SUPER DEALS</h1>
                     <h5 className="fs-5 ">Save more on your groceries</h5>
                   </div>
-                  <img
-                    src="https://i.imgur.com/9oB1oOH.png"
-                    alt=""
-                    className="img-fluid position-relative"
-                  />
+                  <img src="https://i.imgur.com/9oB1oOH.png" alt="" className="img-fluid position-relative" />
                 </DealBox>
               </div>
             </div>
             <div className="col-lg-4">
               <DealBox className="with-bg h-100 d-flex flex-column text-center p-5">
                 <h1 className="red-text fw-bolder">15% OFF</h1>
-                <h4 className="fw-semibold">
-                  For new users, sign up for this exclusive promo
-                </h4>
-                <form
-                  action=""
-                  method="post"
-                  className="d-flex flex-column align-items-center"
-                >
+                <h4 className="fw-semibold">For new users, sign up for this exclusive promo</h4>
+                <form action="" method="post" className="d-flex flex-column align-items-center">
                   <div className="input-group py-3">
                     <span className="input-icon position-relative">
                       <EnvelopeIcon className="position-absolute" size="xl" />
                     </span>
-                    <input
-                      type="email"
-                      name=""
-                      id=""
-                      placeholder="Email address"
-                      className="form-control p-4 w-100"
-                    />
+                    <input type="email" name="email" placeholder="Email address" className="form-control p-4 w-100" />
                   </div>
                   <div className="input-group py-2">
                     <span className="input-icon position-relative">
                       <LockIcon className="position-absolute" size="xl" />
                     </span>
-                    <input
-                      type="password"
-                      name=""
-                      id=""
-                      placeholder="Password"
-                      className="form-control p-4 w-100"
-                    />
+                    <input type="password" name="password" placeholder="Password" className="form-control p-4 w-100" />
                   </div>
                   <div className="input-group py-3">
                     <span className="input-icon position-relative">
@@ -304,8 +224,7 @@ export default function Homepage() {
                     </span>
                     <input
                       type="password"
-                      name=""
-                      id=""
+                      name="confirm-password"
                       placeholder="Confirm Password"
                       className="form-control p-4 w-100"
                     />
@@ -320,5 +239,7 @@ export default function Homepage() {
         </div>
       </section>
     </main>
-  );
+  )
 }
+
+export default HomePage

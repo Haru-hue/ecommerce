@@ -1,5 +1,6 @@
-import { useLocation } from "react-router";
-import { GoogleStoreBadge } from "../assets/images";
+import { useLocation } from 'react-router'
+
+import { GoogleStoreBadge } from '../assets/images'
 
 import {
   CopyrightIcon,
@@ -10,13 +11,11 @@ import {
   ShieldIcon,
   TagsIcon,
   UserGroupIcon,
-} from "../components/icons";
+} from './icons'
 
 export default function Footer() {
-  const location = useLocation();
-  const isHidden = location.pathname.startsWith("/user")
-    ? "footer hidden"
-    : "footer";
+  const location = useLocation()
+  const isHidden = location.pathname.startsWith('/user') ? 'footer hidden' : 'footer'
 
   return (
     <footer className="container-fluid">
@@ -54,12 +53,10 @@ export default function Footer() {
         <div className="footer-bottom p-5">
           <div className="row">
             <div className="col-lg-4">
-              <h5 className="fw-bold">
-                FarmHub - Connecting Farmers to Buyers
-              </h5>
+              <h5 className="fw-bold">FarmHub - Connecting Farmers to Buyers</h5>
               <p className="ext-muted">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
               </p>
               <ul className="pt-3">
                 <li className="d-flex">
@@ -107,20 +104,15 @@ export default function Footer() {
             <div className="col-lg-2">
               <h5 className="fw-bold pb-3">Resources</h5>
               <div className="play-icon">
-                <img
-                  src={GoogleStoreBadge}
-                  alt="google store badge"
-                  className="img-fluid w-60"
-                />
+                <img src={GoogleStoreBadge} alt="google store badge" className="img-fluid w-60" />
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="copyright p-4 text-muted">
-        <CopyrightIcon /> 2023 <b className="text-dark">FarmHub.</b> by Uko
-        Joshua. All Rights Reserved
+        <CopyrightIcon /> 2023 <b className="text-dark">FarmHub.</b> by Uko Joshua. All Rights Reserved
       </div>
     </footer>
-  );
+  )
 }
