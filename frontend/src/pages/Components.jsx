@@ -1,6 +1,6 @@
 import Button from "../components/button/index";
 import UserCard from "../components/userCard";
-import BunnyAvatar from "../assets/bunny_avatar.png";
+import BunnyAvatar from "../assets/images/bunny_avatar.png";
 
 const dummyUser = {
   availability: "Mon - Sun (9am - 6pm)",

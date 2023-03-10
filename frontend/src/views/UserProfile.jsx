@@ -1,5 +1,5 @@
 import UserCard from "../components/userCard";
-import BunnyAvatar from "../assets/bunny_avatar.png";
+import BunnyAvatar from "../assets/images/bunny_avatar.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./UserProfile.module.scss";
