@@ -12,6 +12,7 @@
     "api/(.*)$",
     "providers/(.*)$",
     "components/(.*)$",
+    "routes/(.*)$",
     "utils/(.*)$",
     "assets/(.*)$",
     "^[./]"

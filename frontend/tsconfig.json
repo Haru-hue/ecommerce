@@ -15,6 +15,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "paths": {
+      "assets/*": ["./src/assets/*"],
+      "components/*": ["./src/components/*"],
+      "router/*": ["./src/router/*"],
+      "routes/*": ["./src/routes/*"],
+      "style/*": ["./src/style/*"]
+    },
     "types": [],
     "typeRoots": ["./src/custom.d.ts", "./node_modules/@types"]
   },
