@@ -9,20 +9,21 @@ import bread from "../images/bread.png";
 import alb from "../images/almond-breeze.png";
 import DealBox from "../components/deal-box";
 import milk from "../images/milk.png";
+import { EnvelopeIcon, LockIcon, RepeatIcon } from "../components/icons";
+
+const grid = [
+  { title: "Fruits & Vegetables", image: fruit },
+  { title: "Frozen Seafoods", image: fish },
+  { title: "Dairy Products", image: dairy },
+  { title: "Wheat and Grains", image: wheat },
+  { title: "Bread and Pastries", image: bread },
+  { title: "Raw Meats", image: meat },
+];
 
 export default function Homepage() {
-  const grid = [
-    { title: "Fruits & Vegetables", image: fruit },
-    { title: "Frozen Seafoods", image: fish },
-    { title: "Dairy Products", image: dairy },
-    { title: "Wheat and Grains", image: wheat },
-    { title: "Bread and Pastries", image: bread },
-    { title: "Raw Meats", image: meat },
-  ];
-
-  const categoryGrid = grid.map((item, index) => {
+  const categoryGrid = grid.map((item) => {
     return (
-      <div className="d-flex flex-column align-items-center" key={index}>
+      <div className="d-flex flex-column align-items-center" key={item.title}>
         <div className="category-img">
           <img src={item.image} alt={item.title} className="p-4" />
         </div>
@@ -269,7 +270,7 @@ export default function Homepage() {
                 >
                   <div className="input-group py-3">
                     <span className="input-icon position-relative">
-                      <i className="fa-regular fa-envelope position-absolute fs-4"></i>
+                      <EnvelopeIcon className="position-absolute" size="xl" />
                     </span>
                     <input
                       type="email"
@@ -281,7 +282,7 @@ export default function Homepage() {
                   </div>
                   <div className="input-group py-2">
                     <span className="input-icon position-relative">
-                      <i className="fa-solid fa-lock position-absolute fs-4"></i>
+                      <LockIcon className="position-absolute" size="xl" />
                     </span>
                     <input
                       type="password"
@@ -293,7 +294,7 @@ export default function Homepage() {
                   </div>
                   <div className="input-group py-3">
                     <span className="input-icon position-relative">
-                      <i className="fa-solid fa-repeat position-absolute fs-4"></i>
+                      <RepeatIcon className="position-absolute" size="xl" />
                     </span>
                     <input
                       type="password"

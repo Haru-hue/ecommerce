@@ -1,13 +1,22 @@
 import { useLocation } from "react-router";
 import Button from "../components/button/index";
 import Logo from "../images/Logo.png";
+import {
+  ArrowDownIcon,
+  BoltIcon,
+  CircleQuestionIcon,
+  HeartIcon,
+  MagnifyingGlassIcon,
+  TagIcon,
+  UserIcon,
+} from "../components/icons";
 
 export default function Navbar() {
   const location = useLocation();
   const isHidden = location.pathname.startsWith("/user") ? "hidden" : "";
 
   return (
-    <header className={`${isHidden}`}>
+    <header className={isHidden}>
       <div className="main">
         <nav className="navbar navbar-expand-lg p-5 py-2">
           <div className="navbar-brand px-5">
@@ -37,7 +46,7 @@ export default function Navbar() {
                   placeholder="Search for products here"
                 />
                 <div className="input-group-text">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <MagnifyingGlassIcon />
                 </div>
               </div>
             </div>
@@ -56,13 +65,13 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto navbar-icons d-flex justify-content-around">
               <li className="nav-item">
-                <i class="fa-regular fa-user"></i>
+                <UserIcon />
               </li>
               <li className="nav-item">
-                <i class="fa-regular fa-heart"></i>
+                <HeartIcon />
               </li>
               <li className="nav-item">
-                <i class="fa-solid fa-circle-question"></i>
+                <CircleQuestionIcon />
               </li>
             </ul>
           </div>
@@ -84,13 +93,13 @@ export default function Navbar() {
           </Button>
           <h6 className="fw-bold">
             <span>
-              <i class="fa-solid fa-bolt"></i>
+              <BoltIcon />
             </span>
             Today's Deals
           </h6>
           <h6 className="fw-bold">
             <span>
-              <i class="fa-solid fa-tag"></i>
+              <TagIcon />
             </span>
             Special Discounts
           </h6>
@@ -98,7 +107,7 @@ export default function Navbar() {
         <ul className="navbar-nav">
           <h6 className="d-flex align-items-center fw-bold">
             <span>
-              <i class="fa-solid fa-arrows-rotate"></i>
+              <ArrowDownIcon />
             </span>
             Recently Viewed
           </h6>
