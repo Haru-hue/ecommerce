@@ -1,5 +1,5 @@
 import { useLocation } from "react-router";
-import playBadge from "../images/Google_Play_Store_badge.png";
+import { GoogleStoreBadge } from "../assets/images";
 
 import {
   CopyrightIcon,
@@ -107,7 +107,11 @@ export default function Footer() {
             <div className="col-lg-2">
               <h5 className="fw-bold pb-3">Resources</h5>
               <div className="play-icon">
-                <img src={playBadge} alt="" className="img-fluid w-60" />
+                <img
+                  src={GoogleStoreBadge}
+                  alt="google store badge"
+                  className="img-fluid w-60"
+                />
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router";
 import Button from "../components/button/index";
-import Logo from "../images/Logo.png";
+import { Logo } from "../assets/images";
 import {
   ArrowDownIcon,
   BoltIcon,
@@ -27,14 +27,14 @@ export default function Navbar() {
           <form action="" className="d-flex ps-5" role="search">
             <div className="search-field d-flex align-items-center">
               <span className="d-flex align-items-center">
-                <select name="" id="" className="cat-field">
-                  <option selected>All Categories</option>
-                  <option>Fruits & Vegetables</option>
-                  <option>Frozen Seafoods</option>
-                  <option>Dairy Products</option>
-                  <option>Wheat and Grains</option>
-                  <option>Bread and Pastries</option>
-                  <option>Raw Meats</option>
+                <select defaultValue="" name="" id="" className="cat-field">
+                  <option value="">All Categories</option>
+                  <option value="1">Fruits & Vegetables</option>
+                  <option value="2">Frozen Seafoods</option>
+                  <option value="3">Dairy Products</option>
+                  <option value="4">Wheat and Grains</option>
+                  <option value="5">Bread and Pastries</option>
+                  <option value="6">Raw Meats</option>
                 </select>
               </span>
               <div className="input-group">
@@ -52,7 +52,7 @@ export default function Navbar() {
             </div>
           </form>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -60,7 +60,7 @@ export default function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto navbar-icons d-flex justify-content-around">
@@ -89,7 +89,7 @@ export default function Navbar() {
             aria-label="Toggle navigation"
             size="sm"
           >
-            <span class="navbar-toggler-icon"></span> Shop by Category
+            <span className="navbar-toggler-icon"></span> Shop by Category
           </Button>
           <h6 className="fw-bold">
             <span>

@@ -1,7 +1,7 @@
 @use "./style/navbar.scss";
 @use "./style/utilities";
 @use "./style/homepage.scss";
-@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Righteous&family=Rock+Salt&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mulish&family=Righteous&family=Rock+Salt&display=swap");
 
 :root {
   --bg-color-primary: #70d2b6;
@@ -30,9 +30,9 @@
   --grey: #d9d9d9;
   --light-grey: #f3f3f3;
 
-  --red: #C22A2A;
+  --red: #c22a2a;
 
-  --primary-text: 'Mulish', sans-serif;
+  --primary-text: "Mulish", sans-serif;
   --font-text: var(--fa-font-solid);
 }
 
@@ -40,6 +40,3 @@ body {
   overflow-x: hidden;
   font-family: var(--primary-text);
 }
-
-/*Navbar and Footer hide*/
-.separator {  margin: 1rem; }

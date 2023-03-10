@@ -1,23 +1,25 @@
 import Button from "../components/button";
-import farmer from "../images/farmer.png";
-import wheat from "../images/wheat.png";
-import fruit from "../images/fruit-veg.png";
-import fish from "../images/fish.png";
-import dairy from "../images/dairy.png";
-import meat from "../images/meat.png";
-import bread from "../images/bread.png";
-import alb from "../images/almond-breeze.png";
-import DealBox from "../components/deal-box";
-import milk from "../images/milk.png";
 import { EnvelopeIcon, LockIcon, RepeatIcon } from "../components/icons";
+import DealBox from "../components/deal-box";
+import {
+  AlmondBreeze,
+  Bread,
+  Dairy,
+  Farmer,
+  Fish,
+  Fruit,
+  Meat,
+  Milk,
+  Wheat,
+} from "../assets/images";
 
 const grid = [
-  { title: "Fruits & Vegetables", image: fruit },
-  { title: "Frozen Seafoods", image: fish },
-  { title: "Dairy Products", image: dairy },
-  { title: "Wheat and Grains", image: wheat },
-  { title: "Bread and Pastries", image: bread },
-  { title: "Raw Meats", image: meat },
+  { title: "Fruits & Vegetables", image: Fruit },
+  { title: "Frozen Seafoods", image: Fish },
+  { title: "Dairy Products", image: Dairy },
+  { title: "Wheat and Grains", image: Wheat },
+  { title: "Bread and Pastries", image: Bread },
+  { title: "Raw Meats", image: Meat },
 ];
 
 export default function Homepage() {
@@ -39,7 +41,7 @@ export default function Homepage() {
             <div className="col-lg-8">
               <div
                 id="carouselExampleControls"
-                class="carousel slide"
+                className="carousel slide"
                 data-bs-ride="false"
                 data-bs-interval="false"
               >
@@ -72,28 +74,28 @@ export default function Homepage() {
                   </div>
                 </div>
                 <button
-                  class="carousel-control-prev"
+                  className="carousel-control-prev"
                   type="button"
                   data-bs-target="#carouselExampleControls"
                   data-bs-slide="prev"
                 >
                   <span
-                    class="carousel-control-prev-icon"
+                    className="carousel-control-prev-icon"
                     aria-hidden="true"
                   ></span>
-                  <span class="visually-hidden">Previous</span>
+                  <span className="visually-hidden">Previous</span>
                 </button>
                 <button
-                  class="carousel-control-next"
+                  className="carousel-control-next"
                   type="button"
                   data-bs-target="#carouselExampleControls"
                   data-bs-slide="next"
                 >
                   <span
-                    class="carousel-control-next-icon"
+                    className="carousel-control-next-icon"
                     aria-hidden="true"
                   ></span>
-                  <span class="visually-hidden">Next</span>
+                  <span className="visually-hidden">Next</span>
                 </button>
               </div>
             </div>
@@ -108,7 +110,7 @@ export default function Homepage() {
                     Sell Now
                   </Button>
                 </div>
-                <img src={farmer} alt="" className="img-fluid ms-4" />
+                <img src={Farmer} alt="" className="img-fluid ms-4" />
               </div>
             </div>
           </div>
@@ -131,7 +133,11 @@ export default function Homepage() {
             </div>
           </div>
           <div className="col-lg-6">
-            <img src={alb} alt="Almond Breeze" className="img-fluid m-auto" />
+            <img
+              src={AlmondBreeze}
+              alt="Almond Breeze"
+              className="img-fluid m-auto"
+            />
           </div>
           <div className="col-lg-3">
             <div className="deals d-flex text-end align-items-end flex-column py-4">
@@ -196,7 +202,7 @@ export default function Homepage() {
                 <h3>₦1,800.00</h3>
               </div>
             </div>
-            <img src={milk} alt="" className="img-fluid" />
+            <img src={Milk} alt="" className="img-fluid" />
           </DealBox>
           <DealBox color="brown">
             <div className="text-light py-3">
