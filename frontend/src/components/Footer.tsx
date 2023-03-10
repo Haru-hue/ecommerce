@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router'
 
-import { GoogleStoreBadge } from '../assets/images'
+import { GoogleStoreBadge } from 'assets/images'
 
 import {
   CopyrightIcon,

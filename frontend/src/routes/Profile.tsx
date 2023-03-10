@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import UserCard from '../components/userCard'
+import UserCard from 'components/userCard'
 
-import BunnyAvatar from '../assets/images/bunny_avatar.png'
+import BunnyAvatar from 'assets/images/bunny_avatar.png'
 
 import styles from './Profile.module.scss'
 

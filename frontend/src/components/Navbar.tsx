@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router'
 
-import { Logo } from '../assets/images'
+import { Logo } from 'assets/images'
 
 import Button from './button/index'
 import { ArrowDownIcon, BoltIcon, CircleQuestionIcon, HeartIcon, MagnifyingGlassIcon, TagIcon, UserIcon } from './icons'

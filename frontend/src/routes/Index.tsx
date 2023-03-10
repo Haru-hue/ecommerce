@@ -1,8 +1,8 @@
-import Button from '../components/button'
-import DealBox from '../components/deal-box'
-import { EnvelopeIcon, LockIcon, RepeatIcon } from '../components/icons'
+import Button from 'components/button'
+import DealBox from 'components/deal-box'
+import { EnvelopeIcon, LockIcon, RepeatIcon } from 'components/icons'
 
-import { AlmondBreeze, Bread, Dairy, Farmer, Fish, Fruit, Meat, Milk, Wheat } from '../assets/images'
+import { AlmondBreeze, Bread, Dairy, Farmer, Fish, Fruit, Meat, Milk, Wheat } from 'assets/images'
 
 const grid = [
   { title: 'Fruits & Vegetables', image: Fruit },
