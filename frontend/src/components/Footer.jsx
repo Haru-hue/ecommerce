@@ -3,7 +3,7 @@ import playBadge from "../images/Google_Play_Store_badge.png"
 
 export default function Footer () {
     const location = useLocation()
-    const isHidden = location.pathname.startsWith('/user') ? 'hidden' : ''
+    const isHidden = location.pathname.startsWith('/user/') ? 'd-none' : ''
     return (
         <footer className="container-fluid">
             <div className={`footer ${isHidden}`}>

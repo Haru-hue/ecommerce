@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./routes/Root";
 import Homepage from "./pages/Homepage";
 import Components from "./pages/Components";
-import Modal from "./pages/SignInModal";
+import { Register } from "./pages/Modal";
 import ProductPage from "./views/ProductPage";
 import UserProfile from "./views/UserProfile";
 
@@ -17,12 +17,12 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "login",
-        element: <Modal />,
-      },
-      {
         path: "products",
         element: <ProductPage />,
+      },
+      {
+        path: "/user/register",
+        element: <Register/>
       },
       {
         path: "profiles/:userId",

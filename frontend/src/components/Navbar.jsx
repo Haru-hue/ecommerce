@@ -4,7 +4,7 @@ import Logo from '../images/Logo.png'
 
 export default function Navbar () {
     const location = useLocation()
-    const isHidden = location.pathname.startsWith('/user') ? 'hidden' : ''
+    const isHidden = location.pathname.startsWith('/user') ? 'd-none' : ''
 
     return (
         <header className={`${isHidden}`}>
