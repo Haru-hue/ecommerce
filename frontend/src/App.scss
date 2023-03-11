@@ -1,7 +1,7 @@
-@use "./style/navbar.scss";
-@use "./style/utilities";
-@use "./style/homepage.scss";
-@import url("https://fonts.googleapis.com/css2?family=Mulish&family=Righteous&family=Rock+Salt&display=swap");
+@use './style/navbar.scss';
+@use './style/utilities';
+@use './style/homepage.scss';
+@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Righteous&family=Rock+Salt&display=swap');
 
 :root {
   --bg-color-primary: #70d2b6;
@@ -32,7 +32,7 @@
 
   --red: #c22a2a;
 
-  --primary-text: "Mulish", sans-serif;
+  --primary-text: 'Mulish', sans-serif;
   --font-text: var(--fa-font-solid);
 }
 
