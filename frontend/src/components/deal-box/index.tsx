@@ -1,3 +1,5 @@
+import { joinStringList } from 'utils'
+
 import { PropsWithChildren } from 'react'
 
 import styles from './DealBox.module.scss'
@@ -10,7 +12,7 @@ interface CustomProps {
 }
 
 const getBoxClassName = ({ className, color }: CustomProps) => {
-  return [styles.box, color ? styles[color] : null, className].filter(Boolean).join(' ')
+  return joinStringList([styles.box, color ? styles[color] : null, className])
 }
 
 type Props = CustomProps

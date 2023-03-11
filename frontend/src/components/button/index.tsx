@@ -1,3 +1,5 @@
+import { joinStringList } from 'utils'
+
 import { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react'
 
 import styles from './Button.module.scss'
@@ -16,15 +18,13 @@ interface CustomProps {
 }
 
 const getBtnClassName = ({ additionalClasses, color, size, variant }: CustomProps) => {
-  return [
+  return joinStringList([
     styles.btn,
     color ? styles[color] : null,
     size ? styles[size] : null,
     variant ? styles[variant] : null,
     additionalClasses,
-  ]
-    .filter(Boolean)
-    .join(' ')
+  ])
 }
 
 type Props = CustomProps & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
