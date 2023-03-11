@@ -1,10 +1,11 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
-import Homepage from 'routes/Index'
-import LoginPage from 'routes/Login'
-import ProductsPage from 'routes/Products'
-import UserProfilePage from 'routes/Profile'
-import Root from 'routes/Root'
+const Homepage = lazy(() => import('routes/Index'))
+const LoginPage = lazy(() => import('routes/Login'))
+const ProductsPage = lazy(() => import('routes/Products'))
+const Root = lazy(() => import('routes/Root'))
+const UserProfilePage = lazy(() => import('routes/Profile'))
 
 const router = createBrowserRouter([
   {
