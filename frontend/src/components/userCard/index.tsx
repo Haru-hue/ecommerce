@@ -1,42 +1,28 @@
-import Button from "../button";
-import styles from "./UserCard.module.scss";
+import Button from '../button'
+import styles from './UserCard.module.scss'
 
 interface Props {
-  availability: string;
-  id: string;
-  imageUrl?: string;
-  isOwner: boolean;
-  name: string;
+  availability?: string
+  id?: string
+  imageUrl?: string
+  isOwner: boolean
+  name?: string
 }
 
 // User object should be read from context or staticProps
-export const UserCard = ({
-  availability,
-  imageUrl,
-  name,
-  id,
-  isOwner,
-}: Props) => {
+export const UserCard = ({ availability, imageUrl, name, id, isOwner }: Props) => {
   return (
     <section className={styles.userCard}>
       <div className={`${styles.info} ${styles.borderB}`}>
-        <img
-          className={styles.avatar}
-          src={imageUrl}
-          alt={`${name}'s profile`}
-        />
+        <img className={styles.avatar} src={imageUrl} alt={`${name}'s profile`} />
         <h1 className={styles.name}>{name}</h1>
       </div>
-      {isOwner ? (
-        <BodyForOwner id={id} />
-      ) : (
-        <BodyForVisitor availability={availability} />
-      )}
+      {isOwner ? <BodyForOwner id={id} /> : <BodyForVisitor availability={availability} />}
     </section>
-  );
-};
+  )
+}
 
-const BodyForOwner = ({ id }) => (
+const BodyForOwner = (props: { id?: string }) => (
   <nav>
     <div className={`${styles.nav} ${styles.borderB}`}>
       <div>
@@ -66,9 +52,9 @@ const BodyForOwner = ({ id }) => (
       </a>
     </div>
   </nav>
-);
+)
 
-const BodyForVisitor = ({ availability }) => (
+const BodyForVisitor = ({ availability }: { availability?: string }) => (
   <>
     <div className={`${styles.actions} ${styles.borderB}`}>
       <Button>Show Contact</Button>
@@ -81,6 +67,6 @@ const BodyForVisitor = ({ availability }) => (
       <p className={styles.availabilityText}>{availability}</p>
     </div>
   </>
-);
+)
 
-export default UserCard;
+export default UserCard

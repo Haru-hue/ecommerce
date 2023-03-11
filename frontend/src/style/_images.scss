@@ -1,20 +1,25 @@
 @mixin bg {
-    background-size: cover;  background-position: center;
-    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .carousel-item {
-    @include bg();
-    &:nth-child(1) {
-        background-image: url('../images/slider-image1.jpg');
-    }
-    &:nth-child(2) {
-        background-image: url('../images/slider-image2.jpg');
-    }
+  @include bg();
+  &:nth-child(1) {
+    background-image: url("./slider-image1.jpg");
+  }
+  &:nth-child(2) {
+    background-image: url("./slider-image2.jpg");
+  }
 }
 
-.homepage-slider, .bg-section {
-    background: url('../images/bg.jpg');
+.homepage-slider,
+.bg-section {
+  background: url("./bg.jpg");
 }
 
-.with-bg { background-image: url('../images/bg2.jpg'); @include bg() }
+.with-bg {
+  background-image: url("./bg2.jpg");
+  @include bg();
+}

@@ -1,37 +1,40 @@
-import UserCard from "../components/userCard";
-import BunnyAvatar from "../assets/bunny_avatar.png";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styles from "./UserProfile.module.scss";
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+
+import UserCard from 'components/userCard'
+
+import BunnyAvatar from 'assets/images/bunny_avatar.png'
+
+import styles from './Profile.module.scss'
 
 const dummyUser = {
-  availability: "Mon - Sun (9am - 6pm)",
-  name: "Mark Smith",
+  availability: 'Mon - Sun (9am - 6pm)',
+  name: 'Mark Smith',
   imageUrl: BunnyAvatar,
-  userId: "129",
-};
+  id: '129',
+}
 
-export default function Profile() {
-  const { userId } = useParams();
+const Profile = () => {
+  const { userId = '0' } = useParams()
   // Not the best API but I will improve this in the next commit
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [user, setUser] = useState<null | typeof dummyUser>(null)
 
-  const isOwner = userId > 1;
+  const isOwner = userId > '1'
 
   useEffect(() => {
     new Promise((reject, resolve) => {
-      setIsLoading(true);
+      setIsLoading(true)
       setTimeout(() => {
-        setIsLoading(false);
-        setUser(dummyUser);
-        return resolve(null);
-      }, 2500);
-    });
-  }, [userId]);
+        setIsLoading(false)
+        setUser(dummyUser)
+        return resolve(null)
+      }, 2500)
+    })
+  }, [userId])
 
   if (isLoading) {
-    return <div>Loading profile...</div>;
+    return <div>Loading profile...</div>
   }
 
   return (
@@ -52,5 +55,7 @@ export default function Profile() {
         </div>
       </div>
     </section>
-  );
+  )
 }
+
+export default Profile

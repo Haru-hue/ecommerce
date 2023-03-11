@@ -1,109 +1,206 @@
-@use './images';
+@use "./images";
 
 @mixin tiny-line {
-    content: "";
-    border-left: 1px solid black;
-    padding: 0 1rem;
-    height: 14px;
-    display: inline-block;
+  content: "";
+  border-left: 1px solid black;
+  padding: 0 1rem;
+  height: 14px;
+  display: inline-block;
 }
 
-.carousel-item, .slider-box, .promo-banner {
-    height: 400px; border-radius: var(--border-radius);
+.carousel-item,
+.slider-box,
+.promo-banner {
+  height: 400px;
+  border-radius: var(--border-radius);
 }
 
-.slider-box { background: #37A59A; }
-.heading { max-width: 375px; 
-    p {
-        &::before { @include tiny-line() } &::after {  content: "\f061"; font: var(--fa-font-solid); padding-left: 1rem;}
-    }
+.slider-box {
+  background: #37a59a;
 }
-.promo-banner { 
-    background: #6ED1B6; padding: 3rem;
-    h1 { font-family: 'Righteous', cursive; line-height: .75;  }
-    img {     
-        left: 8rem; top: 2.75rem;
-        position: relative; width: 350px;
+.heading {
+  max-width: 375px;
+  p {
+    &::before {
+      @include tiny-line();
     }
+    &::after {
+      content: "\f061";
+      font: var(--fa-font-solid);
+      padding-left: 1rem;
+    }
+  }
+}
+.promo-banner {
+  background: #6ed1b6;
+  padding: 3rem;
+  h1 {
+    font-family: "Righteous", cursive;
+    line-height: 0.75;
+  }
+  img {
+    left: 8rem;
+    top: 2.75rem;
+    position: relative;
+    width: 350px;
+  }
 }
 
 .category-section {
-    display: grid;  grid-template-columns: repeat(6, 1fr);
-    div:nth-child(5) > .category-img img { transform: rotate(45deg);  }
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  div:nth-child(5) > .category-img img {
+    transform: rotate(45deg);
+  }
 }
 
 .category-img {
-    background: #F7F7F6; @extend .form-control; width: 175px;
-    img {  width: 175px; height: 175px; object-fit: contain;  }
+  background: #f7f7f6;
+  @extend .form-control;
+  width: 175px;
+  img {
+    width: 175px;
+    height: 175px;
+    object-fit: contain;
+  }
 }
 
 .deals-section {
-    .heading { max-width: 325px;}
+  .heading {
+    max-width: 325px;
+  }
 }
 
-.deals-grid { 
-    display: grid; grid-template-columns: repeat(4, 500px);
-    gap: 20px;
-    .deal-box { 
-        padding: 2rem 3rem; width: 100%; height: 300px; overflow: hidden;
-        &:first-child img { transform: rotate(-20deg);} &:last-child img { bottom: 7rem; position: relative; left: 7rem }
-        &:nth-child(2) img {
-            position: relative;
-            transform: rotate(-25deg);
-            top: 3rem;
-            right: 0.75rem;
-            height: 120%;
-        }
-        &:nth-child(3) img {
-            height: 180%; position: relative;
-            bottom: 18rem; right: -12rem;
-        }
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 500px);
+  gap: 20px;
+  .deal-box {
+    padding: 2rem 3rem;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    &:first-child img {
+      transform: rotate(-20deg);
     }
+    &:last-child img {
+      bottom: 7rem;
+      position: relative;
+      left: 7rem;
+    }
+    &:nth-child(2) img {
+      position: relative;
+      transform: rotate(-25deg);
+      top: 3rem;
+      right: 0.75rem;
+      height: 120%;
+    }
+    &:nth-child(3) img {
+      height: 180%;
+      position: relative;
+      bottom: 18rem;
+      right: -12rem;
+    }
+  }
 }
 
-.title-grid { max-width: 1000px; }
+.title-grid {
+  max-width: 1000px;
+}
 
 .homepage-slider {
-    .carousel-control-next, .carousel-control-prev { background: white; opacity: 1; 
-        padding: 7.5px; top: unset; bottom: 1.5rem; width: 4%; @extend .form-control; font-size: 1.75em; color: black;}
-    .carousel-control-prev { right: 5rem; left: unset; background-image: unset; } 
-    .carousel-control-prev-icon::before { content: "\f053"; font: var(--font-text); }
-    .carousel-control-next-icon::before { content: "\f054"; font: var(--font-text); }
-    .carousel-control-prev-icon, .carousel-control-next-icon {background: unset;}
-    .carousel-control-next {
-        right: 1rem; background-image: unset
-    }
+  .carousel-control-next,
+  .carousel-control-prev {
+    background: white;
+    opacity: 1;
+    padding: 7.5px;
+    top: unset;
+    bottom: 1.5rem;
+    width: 4%;
+    @extend .form-control;
+    font-size: 1.75em;
+    color: black;
+  }
+  .carousel-control-prev {
+    right: 5rem;
+    left: unset;
+    background-image: unset;
+  }
+  .carousel-control-prev-icon::before {
+    content: "\f053";
+    font: var(--font-text);
+  }
+  .carousel-control-next-icon::before {
+    content: "\f054";
+    font: var(--font-text);
+  }
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background: unset;
+  }
+  .carousel-control-next {
+    right: 1rem;
+    background-image: unset;
+  }
 }
 
-.shop-button { 
-    padding: 1.5em 2.5em; background: white; 
-    border: white; color: black;
-} 
+.shop-button {
+  padding: 1.5em 2.5em;
+  background: white;
+  border: white;
+  color: black;
+}
 
-.deals h1 { font-family: 'Rock Salt', cursive; }
+.deals h1 {
+  font-family: "Rock Salt", cursive;
+}
 
 .bg-section {
-    .deal-box {
-        height: 300px; display: flex; overflow: hidden; margin: 5px 0;
-        &:first-child img { height: 175% } &:last-child img { top: 3rem; height: 110%; left: 8rem; }
+  .deal-box {
+    height: 300px;
+    display: flex;
+    overflow: hidden;
+    margin: 5px 0;
+    &:first-child img {
+      height: 175%;
     }
+    &:last-child img {
+      top: 3rem;
+      height: 110%;
+      left: 8rem;
+    }
+  }
 }
 
-.deal-text h1 { background: var(--red); }
-.form-control { border-radius: var(--radius) !important;} 
-.input-group input {
-    border-radius: var(--radius);
-    
-    &::placeholder {
-        padding-left: 2rem;
-    }
+.deal-text h1 {
+  background: var(--red);
 }
-.input-icon i { z-index: 5; padding: 25px 15px; }
+.form-control {
+  border-radius: var(--radius) !important;
+}
+.input-group input {
+  border-radius: var(--radius);
+
+  &::placeholder {
+    padding-left: 2rem;
+  }
+}
+.input-icon i,
+.input-icon svg {
+  z-index: 5;
+  padding: 25px 15px;
+}
 
 .btn-register {
-    font-size: 1.5em; background: var(--bg-color-secondary);
-    padding: 1em 4em; border: none; color: var(--text-color-secondary);
+  font-size: 1.5em;
+  background: var(--bg-color-secondary);
+  padding: 1em 4em;
+  border: none;
+  color: var(--text-color-secondary);
 }
 
 /*Footer*/
-.services-section, .footer-bottom { border-bottom: .5px solid var(--text-color-grey);}
+.services-section,
+.footer-bottom {
+  border-bottom: 0.5px solid var(--text-color-grey);
+}
