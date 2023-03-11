@@ -20,7 +20,9 @@
       "components/*": ["./src/components/*"],
       "router/*": ["./src/router/*"],
       "routes/*": ["./src/routes/*"],
-      "style/*": ["./src/style/*"]
+      "style/*": ["./src/style/*"],
+      "utils": ["./src/utils/index"],
+      "utils/*": ["./src/utils/*"]
     },
     "types": [],
     "typeRoots": ["./src/custom.d.ts", "./node_modules/@types"]
