@@ -1,7 +1,7 @@
-@use "./images";
+@use './images';
 
 @mixin tiny-line {
-  content: "";
+  content: '';
   border-left: 1px solid black;
   padding: 0 1rem;
   height: 14px;
@@ -25,7 +25,7 @@
       @include tiny-line();
     }
     &::after {
-      content: "\f061";
+      content: '\f061';
       font: var(--fa-font-solid);
       padding-left: 1rem;
     }
@@ -35,7 +35,7 @@
   background: #6ed1b6;
   padding: 3rem;
   h1 {
-    font-family: "Righteous", cursive;
+    font-family: 'Righteous', cursive;
     line-height: 0.75;
   }
   img {
@@ -127,11 +127,11 @@
     background-image: unset;
   }
   .carousel-control-prev-icon::before {
-    content: "\f053";
+    content: '\f053';
     font: var(--font-text);
   }
   .carousel-control-next-icon::before {
-    content: "\f054";
+    content: '\f054';
     font: var(--font-text);
   }
   .carousel-control-prev-icon,
@@ -152,7 +152,7 @@
 }
 
 .deals h1 {
-  font-family: "Rock Salt", cursive;
+  font-family: 'Rock Salt', cursive;
 }
 
 .bg-section {
@@ -200,7 +200,6 @@
 }
 
 /*Footer*/
-.services-section,
-.footer-bottom {
+.services-section {
   border-bottom: 0.5px solid var(--text-color-grey);
 }
