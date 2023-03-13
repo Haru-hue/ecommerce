@@ -1,0 +1,9 @@
+extends layouts/layout
+
+block content
+  h1 All Products
+  each product in products
+    div
+      h2= product.name
+      p= product.price
+      p= product.category

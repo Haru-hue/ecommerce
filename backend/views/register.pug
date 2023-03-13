@@ -1,0 +1,14 @@
+extends layouts/layout.pug
+
+block content
+    form(action="/register" method="post")
+        h2 Register
+        div.input-field
+            input(type="email" name="email" placeholder="Enter E-mail Address")
+        div.input-field
+            input(type="text" name="firstName" placeholder="Enter First Name")
+        div.input-field
+            input(type="text" name="lastName" placeholder="Enter Last Name")
+        div.input-field
+            input(type="text" name="password" placeholder="Enter Password")
+        input(type="submit" value="Register")

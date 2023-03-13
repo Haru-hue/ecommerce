@@ -1,0 +1,15 @@
+extends layouts/layout.pug
+
+block content
+    form(action="/add-product", method="post") 
+        div.input-field
+            input(type="text", name="name" value="Enter product name")
+        div.input-field
+            input(type="number", name="price" value="Enter Price")
+        select(name="category") 
+            each category in categories
+                option(value=category.name)= category.name
+        input(type="submit", value="Submit")
+
+    if (success)
+        p=success

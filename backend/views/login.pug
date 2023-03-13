@@ -1,0 +1,10 @@
+extends layouts/layout.pug
+
+block content
+    form(action="/" method="post")
+        h2 Login
+        div.input-field
+            input(type="email" name="email" id="username" placeholder="Enter E-mail Address")
+        div.input-field
+            input(type="text" name="password" id="username" placeholder="Enter Password")
+        input(type="submit" value="Log In")

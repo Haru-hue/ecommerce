@@ -1,8 +1,8 @@
-const { response } = require('express');
 const mongoose = require('mongoose');
 const ProductSchema = require('../models/schemas/product')
 const UserSchema = require('../models/schemas/user')
-require('../models/db')
+const CategorySchema = require('../models/schemas/category')
+const session = require('express-session');
 
 //User Routes
 // Adding a User
@@ -14,24 +14,41 @@ exports.addUser = async (req, res) => {
         password: req.body.password,
     })
     await user.save()
-    res.send({ success: 'User added successfully' })
+    console.log({ success: 'User added successfully' })
+    console.log(req.body)
+    res.redirect('/login')
 }
 
 // Get a User
+exports.userLogin = (req, res, next) => {
+    res.render('login', {
+        docTitle: 'Login',
+        path: 'login'
+    })
+}
+
+exports.userRegister = (req, res, next) => {
+    res.render('register', {
+        docTitle: 'Register',
+        path: 'register'
+    })
+}
+
 exports.getUser = async (req, res) => {
     const existingUser = await UserSchema.findOne({ email: req.body.email })
-    if(!existingUser) {
-        res.send({ error: 'User not found' })
-        return
-    } else {
-        if(existingUser.password === req.body.password) {
-            res.send({ success: 'User verified' })
-            return
-        } else {
-            res.send({ error: 'Invalid password' })
-        }
+    if (!existingUser) {
+        console.log({ error: 'User not found' });
+        return;
     }
-}
+    if (existingUser.password === req.body.password) {
+        req.session.userId = existingUser._id; // store the user ID in the session
+        console.log(req.session);
+        console.log({ success: 'User verified' });
+        res.render('welcome', { docTitle: 'Your Title', firstName: existingUser.firstName });
+        return;
+    }
+    console.log({ error: 'Invalid password' });
+};
 
 // Update User Details
 exports.updateUser = async (req, res) => {
@@ -45,9 +62,9 @@ exports.updateUser = async (req, res) => {
         existingUser.phoneNumber = req.body.phoneNumber
 
         await existingUser.save()
-        res.send({ success: 'User details have been updated' })
+        console.log({ success: 'User details have been updated' })
     } else {
-        res.send({ error: 'User details could not be updated' })
+        console.log({ error: 'User details could not be updated' })
     }
 }
 
@@ -55,58 +72,83 @@ exports.viewUser = async (req, res) => {
     const userID = req.params.id
     const existingUser = await UserSchema.findById(userID)
     if(existingUser) {
-        res.send({
+        console.log({
             name: existingUser.firstName + ' ' + existingUser.lastName,
             phoneNumber: existingUser.phoneNumber,
             availability: existingUser.availability
         })
     } else {
-        res.send({ error: 'Not Found' })
+        console.log({ error: 'Not Found' })
     }
 }
 
 //Product Routes
 //Bring out Products
+exports.addCategories = async (req, res) => {
+    const category = new CategorySchema(req.body);
+    await category.save();
+    res.json(category)
+    console.log({ success: 'Category saved' });
+};
+
 exports.getAllProducts = async (req, res) => {
     const allProducts = await ProductSchema.find({})
     if(!allProducts) {
         res.json({ error: 'Products not found'})
     } else {
-        res.send(allProducts)
+        res.json(allProducts);
+    }
+}
+
+exports.getCategories = async (req, res) => {
+    const allCategories = await CategorySchema.find({});
+    if(!allCategories) {
+        res.json({ error: 'Products not found'})
+    } else {
+        res.render('category', { categories: allCategories });
     }
 }
 
 //Add Product
 exports.addProduct = async (req, res) => {
-    const product = new ProductSchema ({
-        name: req.body.name,
-        price: req.body.price,
-        category: req.body.category,
-        meta: {
-            weight: req.body.weight,
-            status: req.body.status,
-            location: req.body.location,
-            shelfLife: req.body.shelfLife,
-        },
-        description: req.body.description,
-    })
-    await product.save()
-    res.send ({ success: 'Product saved' })
-}
+    try {
+      const product = new ProductSchema(req.body);
+      product.category = req.body.category;
+      console.log(req.body.category)
+      await product.save();
+      console.log({ success: 'Product saved' });
+      const allCategories = await CategorySchema.find({});
+      res.render('add-product', { categories: allCategories });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error retrieving categories' });
+    }
+};
 
 //Get Product
 exports.getProduct = async (req, res) => {
     const productId = req.params.id 
     const existingProduct = await ProductSchema.findById(productId)
     if(!existingProduct) {
-        res.send({ error: 'Product not found' })
+        console.log({ error: 'Product not found' })
     } else {
-        res.send ({ product: existingProduct })
+        console.log ({ product: existingProduct })
     }
 }
 
 //Getting Products in a Category
 exports.getCategoryProducts = async (req, res) => {
-    const products = await ProductSchema.find({category: req.params.id})
+    const categoryId = req.params.id;
+    const products = await ProductSchema.find({ category: categoryId }).populate('category');
     res.send(products);
+};
+
+exports.userSession = async (req, res) => {
+    res.render('welcome');
+};
+
+exports.destroySession = (req, res) => {
+    req.session.destroy();
+    console.log('Session destroyed');
+    res.redirect('/login');
 }
