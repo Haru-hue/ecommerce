@@ -2,7 +2,16 @@ const mongoose = require('mongoose');
 const ProductSchema = require('../models/schemas/product')
 const UserSchema = require('../models/schemas/user')
 const CategorySchema = require('../models/schemas/category')
-const session = require('express-session');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+
+// Configuration 
+cloudinary.config({
+    cloud_name: "",
+    api_key: "",
+    api_secret: ""
+  });
+ 
 
 //User Routes
 // Adding a User
@@ -72,11 +81,7 @@ exports.viewUser = async (req, res) => {
     const userID = req.params.id
     const existingUser = await UserSchema.findById(userID)
     if(existingUser) {
-        console.log({
-            name: existingUser.firstName + ' ' + existingUser.lastName,
-            phoneNumber: existingUser.phoneNumber,
-            availability: existingUser.availability
-        })
+        res.json(existingUser)
     } else {
         console.log({ error: 'Not Found' })
     }
@@ -111,18 +116,58 @@ exports.getCategories = async (req, res) => {
 
 //Add Product
 exports.addProduct = async (req, res) => {
-    try {
-      const product = new ProductSchema(req.body);
-      product.category = req.body.category;
-      console.log(req.body.category)
+    const storage = multer.diskStorage({
+        filename: function (req, file, cb) {
+          cb(null, file.originalname);
+        }
+      });
+      
+    const upload = multer({ storage: storage });
+
+  try {
+    const currentUser = await UserSchema.findOne({ _id: req.session.userId });
+
+    // Upload image to server using multer
+    upload.single('image')(req, res, async function (err) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Error uploading image' });
+      }
+
+      // Upload image to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      // Create new product with image URL
+      const product = new ProductSchema({
+        name: req.body.name,
+        price: req.body.price,
+        category: req.body.category,
+        image: {
+          url: result.secure_url,
+          filename: result.original_filename
+        },
+        meta: {
+          weight: req.body.weight,
+          status: req.body.status,
+          location: req.body.location,
+          shelfLife: req.body.shelfLife
+        },
+        description: req.body.description,
+        reviews: req.body.reviews,
+        owner: currentUser
+      });
+
+      // Save product to database
       await product.save();
+
       console.log({ success: 'Product saved' });
       const allCategories = await CategorySchema.find({});
       res.render('add-product', { categories: allCategories });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error retrieving categories' });
-    }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error retrieving categories' });
+  }
 };
 
 //Get Product
