@@ -2,16 +2,8 @@ import { useLocation } from 'react-router'
 
 import { GoogleStoreBadge } from 'assets/images'
 
-import {
-  CopyrightIcon,
-  EnvelopeSolidIcon,
-  HouseIcon,
-  MoneyBillIcon,
-  PhoneIcon,
-  ShieldIcon,
-  TagsIcon,
-  UserGroupIcon,
-} from './icons'
+import Copyright from './Copyright'
+import { EnvelopeSolidIcon, HouseIcon, MoneyBillIcon, PhoneIcon, ShieldIcon, TagsIcon, UserGroupIcon } from './icons'
 
 export default function Footer() {
   const location = useLocation()
@@ -110,9 +102,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="copyright p-4 text-muted">
-        <CopyrightIcon /> 2023 <b className="text-dark">FarmHub.</b> by Uko Joshua. All Rights Reserved
-      </div>
+      <Copyright />
     </footer>
   )
 }
