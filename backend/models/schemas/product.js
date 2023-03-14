@@ -18,7 +18,11 @@ var Product = new mongoose.Schema({
         shelfLife: String,
     },
     description: String,
-    reviews: String
+    reviews: String,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
 module.exports = mongoose.model('Product', Product)
