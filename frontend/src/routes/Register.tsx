@@ -1,5 +1,7 @@
 import { FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { useGetAuthValues } from 'providers/AuthProvider'
 
 import Button from 'components/button'
 
@@ -24,6 +26,9 @@ interface FormElements extends HTMLFormControlsCollection {
 }
 
 const Register = () => {
+  const { signup } = useGetAuthValues()
+  const navigate = useNavigate()
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -35,16 +40,13 @@ const Register = () => {
     const password = formElements[PASSWORD].value
     const sendOffer = formElements[SEND_OFFER].checked
 
-    const body = {
+    signup({
       email,
       firstName,
       lastName,
       password,
       sendOffer,
-    }
-
-    // TODO: Setup the correct URI
-    fetch('/register', { body: JSON.stringify(body), method: 'POST' })
+    }).then(() => navigate('/login'))
   }
 
   return (
