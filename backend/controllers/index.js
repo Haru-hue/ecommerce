@@ -2,7 +2,6 @@ const { response } = require('express');
 const mongoose = require('mongoose');
 const ProductSchema = require('../models/schemas/product')
 const UserSchema = require('../models/schemas/user')
-require('../models/db')
 
 //User Routes
 // Adding a User
@@ -19,18 +18,13 @@ exports.addUser = async (req, res) => {
 
 // Get a User
 exports.getUser = async (req, res) => {
-    const existingUser = await UserSchema.findOne({ email: req.body.email })
-    if(!existingUser) {
-        res.send({ error: 'User not found' })
-        return
-    } else {
-        if(existingUser.password === req.body.password) {
-            res.send({ success: 'User verified' })
-            return
-        } else {
-            res.send({ error: 'Invalid password' })
-        }
+    const user = await UserSchema.findOne({ email: req.body.email, password: req.body.password })
+
+    if (!user) {
+        return res.send({ error: 'Invalid email or password' })
     }
+
+    return res.json(user)
 }
 
 // Update User Details
