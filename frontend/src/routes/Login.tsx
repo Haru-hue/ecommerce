@@ -1,28 +1,79 @@
+import { FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { useGetAuthValues } from 'providers/AuthProvider'
+
+import Button from 'components/button'
+
+import { Logo2 } from 'assets/images'
+
+import styles from './Login.module.scss'
+
+const EMAIL = 'email'
+const PASSWORD = 'password'
+const REMEMBER_ME = 'rememberMe'
+
+interface FormElements extends HTMLFormControlsCollection {
+  [EMAIL]: HTMLInputElement
+  [PASSWORD]: HTMLInputElement
+  [REMEMBER_ME]: HTMLInputElement
+}
+
 const Login = () => {
+  const { login } = useGetAuthValues()
+  const navigate = useNavigate()
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const formElements = event.currentTarget.elements as FormElements
+    const email = formElements[EMAIL].value
+    const password = formElements[PASSWORD].value
+    const rememberMe = formElements[REMEMBER_ME].checked
+
+    login({
+      email,
+      password,
+      rememberMe,
+    }).then(() => navigate('/'))
+  }
+
   return (
-    <main>
-      <section className="container">
-        <div className="d-flex">
-          <div className="image">Here</div>
-          <h6>Log into your account</h6>
+    <section className={styles.container}>
+      <div>
+        <img alt="logo" className={styles.logo} src={Logo2} />
+        <h2 className={styles.subtitle}>Log into your account</h2>
+      </div>
+      <form onSubmit={onSubmit}>
+        <div className={styles.inputContainer}>
+          <label className={styles.label} htmlFor={EMAIL}>
+            E-mail address
+          </label>
+          <input className={styles.input} type="email" name={EMAIL} />
         </div>
-        <form action="">
-          <div className="mb-3">
-            <label htmlFor="u-mail">E-mail address:</label>
-            <input type="email" name="u-mail" id="" className="form-control" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="u-pwd">Password:</label>
-            <input type="password" name="u-pwd" id="" className="form-control" />
-          </div>
-          <input type="checkbox" name="" id="" /> Remember me
-          <button className="submit btn-modal">Log In</button>
-        </form>
-        <div className="text-center">
-          New to FarmHub? <button>Register here</button>
+        <div className={styles.inputContainer}>
+          <label className={styles.label} htmlFor={PASSWORD}>
+            Password
+          </label>
+          <input className={styles.input} type="password" name={PASSWORD} />
         </div>
-      </section>
-    </main>
+        <div className={styles.rememberMeContainer}>
+          <input className={styles.radioInput} type="checkbox" name={REMEMBER_ME} />
+          <span className={styles.rememberMeText}>Remember me</span>
+        </div>
+        <div>
+          <Button className={styles.btn} size="lg">
+            Log In
+          </Button>
+        </div>
+      </form>
+      <div className={styles.registerContainer}>
+        New to FarmHub?&nbsp;
+        <Link className={styles.registerLink} to="/register">
+          Register here
+        </Link>
+      </div>
+    </section>
   )
 }
 

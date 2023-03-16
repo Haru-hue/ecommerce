@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router()
 const control = require('../controllers/index')
+const connectToMongoose = require('../models/db')
+
+connectToMongoose()
 
 router.get('/', control.userSession)
 
