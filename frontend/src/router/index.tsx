@@ -4,7 +4,8 @@ import { createBrowserRouter } from 'react-router-dom'
 const Homepage = lazy(() => import('routes/Index'))
 const LoginPage = lazy(() => import('routes/Login'))
 const LoginAndRegisterLayout = lazy(() => import('routes/LoginAndRegisterLayout'))
-const ProductsPage = lazy(() => import('routes/Products'))
+const ProductsPage = lazy(() => import('routes/ProductPage'))
+const ShopPage = lazy(() => import('routes/Products'))
 const RegisterPage = lazy(() => import('routes/Register'))
 const Root = lazy(() => import('routes/Root'))
 const UserProfilePage = lazy(() => import('routes/Profile'))
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: 'products',
         element: <ProductsPage />,
+      },
+      {
+        path: 'products/:id',
+        element: <ProductsPage />,
+      },
+      {
+        path: 'shop',
+        element: <ShopPage />,
       },
       {
         path: 'profiles/:userId',

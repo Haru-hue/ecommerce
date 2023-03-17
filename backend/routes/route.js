@@ -13,6 +13,7 @@ router.post('/add-category', control.addCategories)
 router.get('/categories', control.getCategoryProducts)
 router.post('/add-product', control.addProduct)
 router.get('/add-product', control.addProduct)
+router.get('/products/:id', control.getProduct)
 router.get('/category/:id', control.getCategoryProducts)
 
 // User routes

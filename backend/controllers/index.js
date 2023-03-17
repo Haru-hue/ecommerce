@@ -11,7 +11,6 @@ cloudinary.config({
     api_key: "",
     api_secret: ""
   });
- 
 
 //User Routes
 // Adding a User
@@ -117,68 +116,59 @@ exports.getCategories = async (req, res) => {
 //Add Product
 exports.addProduct = async (req, res) => {
     const storage = multer.diskStorage({
-        filename: function (req, file, cb) {
-          cb(null, file.originalname);
-        }
-      });
-      
-    const upload = multer({ storage: storage });
-
-  try {
-    const currentUser = await UserSchema.findOne({ _id: req.session.userId });
-
-    // Upload image to server using multer
-    upload.single('image')(req, res, async function (err) {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Error uploading image' });
+      filename: function (req, file, cb) {
+        cb(null, file.originalname);
       }
-
-      // Upload image to Cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-
-      // Create new product with image URL
-      const product = new ProductSchema({
-        name: req.body.name,
-        price: req.body.price,
-        category: req.body.category,
-        image: {
-          url: result.secure_url,
-          filename: result.original_filename
-        },
-        meta: {
-          weight: req.body.weight,
-          status: req.body.status,
-          location: req.body.location,
-          shelfLife: req.body.shelfLife
-        },
-        description: req.body.description,
-        reviews: req.body.reviews,
-        owner: currentUser
-      });
-
-      // Save product to database
-      await product.save();
-
-      console.log({ success: 'Product saved' });
-      const allCategories = await CategorySchema.find({});
-      res.render('add-product', { categories: allCategories });
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error retrieving categories' });
-  }
-};
+  
+    const upload = multer({ storage: storage }).single('image');
+  
+    try {
+      const currentUser = await UserSchema.findOne({ _id: req.session.userId });
+  
+      upload(req, res, async function (err) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: 'Error uploading image' });
+        }
+  
+        // Create new product with image URL
+        const product = new ProductSchema({
+          ...req.body,
+          owner: currentUser,
+        });
+  
+        if (req.file) {
+          const { path } = req.file;
+          const result = await cloudinary.uploader.upload(path);
+          product.image.url = result.secure_url;
+          product.image.filename = req.file.originalname;
+        }
+  
+        // Save product to database
+        await product.save();
+  
+        console.log(req.body);
+        const allCategories = await CategorySchema.find({});
+        res.render('add-product', { categories: allCategories });
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error retrieving categories' });
+    }
+  };
+  
+  
 
 //Get Product
+
 exports.getProduct = async (req, res) => {
     const productId = req.params.id 
     const existingProduct = await ProductSchema.findById(productId)
-    if(!existingProduct) {
-        console.log({ error: 'Product not found' })
-    } else {
-        console.log ({ product: existingProduct })
-    }
+      .populate('category', 'name') // populate category with only the name field
+      .exec();
+  
+    res.json({ existingProduct });
 }
 
 //Getting Products in a Category

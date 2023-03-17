@@ -7,6 +7,7 @@
   "arrowParens": "avoid",
   "semi": false,
   "importOrder": [
+    "^reset-css",
     "^react*",
     "models/(.*)$",
     "api/(.*)$",
@@ -15,8 +16,7 @@
     "routes/(.*)$",
     "utils/(.*)$",
     "assets/(.*)$",
-    "^[./]",
-    "^reset-css"
+    "^[./]"
   ],
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrderSeparation": true,
