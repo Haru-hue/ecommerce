@@ -1,11 +1,68 @@
 import { useLocation } from 'react-router'
-
 import { Logo } from 'assets/images'
 
 import Button from './button/index'
 import { ArrowDownIcon, BoltIcon, CircleQuestionIcon, HeartIcon, MagnifyingGlassIcon, TagIcon, UserIcon } from './icons'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
-export default function Navbar() {
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  image: {
+    url: string;
+  };
+}
+
+interface SearchBarProps {
+  products: Product[];
+  onProductSelect: (product: Product) => void;
+}
+
+export default function Navbar({ products, onProductSelect }: SearchBarProps) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+
+  const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+  
+    // Perform local search
+    const localResults = products.filter((product) =>
+      product.name.toLowerCase().includes(term.toLowerCase())
+    );
+  
+    // Perform API search
+    let apiResults: Product[] = [];
+    if (term) {
+      try {
+        const response = await axios.get<Product[]>(`http://localhost:5000/shop?q=${term}`);
+        apiResults = response.data;
+        console.log(apiResults);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    // Combine local and API results
+    const results = [...localResults, ...apiResults];
+    setSearchResults(results);
+  };
+
+  async function getResults() {
+    try {
+      const response = await axios.get<Product[]>('http://localhost:5000/shop');
+      setSearchResults(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getResults();
+  }, [])
+
   const location = useLocation()
   const isHidden = location.pathname.startsWith('/user') ? 'hidden' : ''
 
@@ -31,11 +88,45 @@ export default function Navbar() {
                   <option value="6">Raw Meats</option>
                 </select>
               </span>
-              <div className="input-group">
-                <input className="form-control" type="search" name="search" placeholder="Search for products here" />
+              <div className="input-group search-container">
+                <input className="form-control" type="search" name="search" 
+                placeholder="Search for products here" value={searchTerm} onChange={handleSearch} />
                 <div className="input-group-text">
                   <MagnifyingGlassIcon />
                 </div>
+                {/* <div className="search-results">
+                  {searchTerm && searchResults
+                    .filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((item) => {
+                      return (
+                        <div key={item._id} className="search-result d-flex py-2 my-1">
+                          <img src={item?.image?.url} alt={item.name} className="img-fluid w-25" />
+                          <div className="search-result-info ps-1 py-3 small d-flex flex-column">
+                            <p>{item.name}</p>
+                            <p>${item.price}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div> */}
+                { searchTerm && (
+                    <div className="search-results">
+                      {searchResults
+                      .filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                      .map((item) => {
+                        return (
+                          <div key={item._id} className="search-result d-flex py-2 my-1">
+                            <img src={item?.image?.url} alt={item.name} className="img-fluid w-25" />
+                            <div className="search-result-info ps-1 py-3 small d-flex flex-column">
+                              <p>{item.name}</p>
+                              <p>${item.price}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )
+                }
               </div>
             </div>
           </form>

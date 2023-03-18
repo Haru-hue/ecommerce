@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+import CategoryPage from 'routes/CategoryPage'
 
 const Homepage = lazy(() => import('routes/Index'))
 const LoginPage = lazy(() => import('routes/Login'))
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'products/:id',
         element: <ProductsPage />,
+      },
+      {
+        path: 'category/:id',
+        element: <CategoryPage/>,
       },
       {
         path: 'shop',

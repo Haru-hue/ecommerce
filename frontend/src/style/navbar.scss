@@ -58,6 +58,13 @@ header {
     .input-group-text {
       border: none;
       background: unset;
+      outline: none;
+      &:focus {
+        box-shadow: none;
+      }
+      &::placeholder {
+        padding-left: 0;
+      }
     }
     .input-group-text {
       border-radius: 6px;
@@ -69,4 +76,32 @@ header {
   flex: auto;
   max-width: 150px;
   font-size: 23px;
+}
+
+.search-results {
+  position: absolute;
+  z-index: 5;
+  overflow: hidden;
+  width: 100%;
+  top: 3rem;
+  max-height: 300px;
+  background: white;
+  
+  &:hover {
+    overflow-y: auto; /* Show the scrollbar on hover */
+  }
+  
+  /* Customize the scrollbar styles */
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f5f5f5;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+  }
+}
+
+.search-result {
+  border-bottom: 1px solid #ccc;
 }

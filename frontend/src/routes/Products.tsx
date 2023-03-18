@@ -1,11 +1,11 @@
 import axios from "axios";
+import Pagination from "components/Paginate";
 import { useEffect, useState } from "react";
 
 interface Product {
   _id: string;
   name: string;
   price: number;
-  category: string;
   image: {
     url: string;
   };
@@ -14,8 +14,14 @@ interface Product {
   };
 }
 
+interface Category {
+  category: string;
+  count: number;
+}
+
 const ShopPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(20)
 
@@ -23,7 +29,16 @@ const ShopPage = () => {
     try {
       const response = await axios.get<Product[]>('http://localhost:5000/shop');
       setProducts(response.data);
-      console.log(response.data[0].image.url)
+      console.log(response.data[0])
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getCategories() {
+    try {
+      const response = await axios.get<Category[]>('http://localhost:5000/categories');
+      setCategories(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -31,6 +46,7 @@ const ShopPage = () => {
 
   useEffect(() => {
     getProducts();
+    getCategories();
   }, []);
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -43,51 +59,48 @@ const ShopPage = () => {
   }
 
   return (
-    <div className="container">
-      <div className="grid">
-        {currentProducts.map((product) => (
-          <div key={product._id} className="card">
-            <img src={product?.image?.url} alt={product.name} className="card-img-top" />
-            <div className="card-body">
-              <h5 className="card-title">{product.name}</h5>
-              <p className="card-text">{product.price}</p>
-              <p className="card-text">{product.category}</p>
-              <p className="card-text">{product.meta.weight}</p>
+    <div className="container-fluid">
+      <div className="d-flex flex-column">
+        <h1>Shop</h1>
+        <div className="sorting">
+
+        </div>
+      </div>
+      <div className="p-5">
+        <div className="row p-5">
+          <div className="col-lg-3">
+            <div className="d-flex flex-column">
+              <h4>All Categories</h4>
+              <ul className="list-group">
+                {categories.map((category) => (
+                  <button className="list-group-item btn-category" key={category.category}>
+                    {category.category} <div className="ps-3">{category.count}</div>
+                  </button>
+                ))}
+              </ul>
             </div>
           </div>
-        ))}
+          <div className="col-lg-9">
+            <div className="shop-grid">
+              {currentProducts.map((product) => (
+                <div key={product._id} className="card">
+                  <img src={product?.image?.url} alt={product.name} className="card-img-top" />
+                  <div className="card-body">
+                    <h5 className="card-title">{product.name}</h5>
+                    <p className="card-text">{product.price}</p>
+                    <p className="card-text small">{product.meta.weight}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <Pagination productsPerPage={productsPerPage} totalProducts={products.length} currentPage={currentPage}  paginate={paginate} />
       </div>
-      <Pagination productsPerPage={productsPerPage} totalProducts={products.length} paginate={paginate} />
     </div>
   );
 }
 
-interface PaginationProps {
-  productsPerPage: number;
-  totalProducts: number;
-  paginate: (pageNumber: number) => void;
-}
 
-function Pagination({ productsPerPage, totalProducts, paginate }: PaginationProps) {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  return (
-    <nav>
-      <ul className="pagination">
-        {pageNumbers.map((number) => (
-          <li key={number} className="page-item">
-            <button onClick={() => paginate(number)} className="page-link">
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-}
 
 export default ShopPage;

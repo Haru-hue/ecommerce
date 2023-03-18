@@ -105,13 +105,40 @@ exports.getAllProducts = async (req, res) => {
 }
 
 exports.getCategories = async (req, res) => {
-    const allCategories = await CategorySchema.find({});
-    if(!allCategories) {
-        res.json({ error: 'Products not found'})
-    } else {
-        res.render('category', { categories: allCategories });
+    try {
+      const categories = await ProductSchema.aggregate([
+        {
+          $lookup: {
+            from: "categories",
+            localField: "category",
+            foreignField: "_id",
+            as: "category",
+          },
+        },
+        {
+          $unwind: "$category",
+        },
+        {
+          $group: {
+            _id: "$category._id",
+            name: { $first: "$category.name" },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            category: "$name",
+            count: 1,
+          },
+        },
+      ]);
+  
+      res.json(categories);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to get categories" });
     }
-}
+  };
 
 //Add Product
 exports.addProduct = async (req, res) => {

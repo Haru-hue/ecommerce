@@ -12,7 +12,7 @@ var Product = new mongoose.Schema({
         filename: String,
     },
     meta: {
-        weight: Number,
+        weight: String,
         status: Boolean,
         location: String,
         shelfLife: String,
