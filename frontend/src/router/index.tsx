@@ -1,6 +1,11 @@
+import { getApiUrl } from 'utils'
+
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+
 import CategoryPage from 'routes/CategoryPage'
+
+const API_URL = getApiUrl()
 
 const Homepage = lazy(() => import('routes/Index'))
 const LoginPage = lazy(() => import('routes/Login'))
@@ -30,13 +35,16 @@ const router = createBrowserRouter([
       },
       {
         path: 'category/:id',
-        element: <CategoryPage/>,
+        element: <CategoryPage />,
       },
       {
         path: 'shop',
         element: <ShopPage />,
       },
       {
+        loader: ({ params }) => {
+          return fetch(`${API_URL}/user/${params.userId}`)
+        },
         path: 'profiles/:userId',
         element: <UserProfilePage />,
       },
