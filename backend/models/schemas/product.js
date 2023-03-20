@@ -16,9 +16,10 @@ var Product = new mongoose.Schema({
         status: Boolean,
         location: String,
         shelfLife: String,
+        ratings: Number,
+        reviewsCount: Number,
     },
     description: String,
-    reviews: String,
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

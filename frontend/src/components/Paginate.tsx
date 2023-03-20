@@ -1,3 +1,5 @@
+import { Icon } from "@iconify/react";
+
 interface PaginationProps {
     productsPerPage: number;
     totalProducts: number;
@@ -32,27 +34,28 @@ export default function Pagination({ productsPerPage, totalProducts, currentPage
     };
   
     return (
-      <nav>
+      <nav className="d-flex justify-content-center align-items-center">
         <ul className="pagination">
-          <li className="page-item">
-            <button onClick={handlePrevPage} className="page-link">
-              &laquo;
-            </button>
-          </li>
-          <li className="page-item">
+          {currentPage > 1 ? <li className="page-item pe-3">
+            <Icon icon="system-uicons:chevron-left-circle" 
+            className="text-muted fs-2"
+            onClick={handlePrevPage} />
+          </li>: ''}
+          <li className="page-item fw-bold">
             <input
               type="number"
               min="1"
               max={pageNumbers.length}
               value={currentPage}
               onChange={handlePageChange}
-            />
+              className="text-center"
+            /> / {pageNumbers.length}
           </li>
-          <li className="page-item">
-            <button onClick={handleNextPage} className="page-link">
-              &raquo;
-            </button>
-          </li>
+          {currentPage < pageNumbers.length ? <li className="page-item ps-3">
+            <Icon icon="system-uicons:chevron-right-circle" 
+            className="text-muted fs-2"
+            onClick={handleNextPage} />
+          </li>: ''}
         </ul>
       </nav>
     );

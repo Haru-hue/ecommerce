@@ -1,4 +1,42 @@
 .shop-grid {
     display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    gap: 25px;
+    .card {
+        // border: none;
+        .card-img-top img {
+            width: 200px; height: 200px;
+            object-fit: contain;
+        }
+    }
 }
+
+button.btn-category {
+    border: none; border-radius: var(--radius);
+}
+
+.sorting {
+    width: 550px;
+    div {
+        &:first-child { 
+            width: 350px; 
+        &::after {
+            font: var(--font-text);
+            content: "\f078";
+            position: relative;
+            right: 3.5rem;
+            pointer-events: none;
+            }
+        } &:last-child { width: 125px; }
+    }
+    select { 
+        padding: 0.75rem 1.5rem; border: 1px solid #ccc; border-radius: 0.25rem; 
+        outline: none;
+        appearance: none;
+        background: unset; 
+        padding-left: 1rem;
+    } 
+    svg { 
+        cursor:  pointer;
+    } svg.active { color: var(--bg-color-primary); };
+}
+
