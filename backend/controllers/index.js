@@ -60,8 +60,8 @@ exports.getUser = async (req, res) => {
 
 // Update User Details
 exports.updateUser = async (req, res) => {
-    const userID = req.params.id
-    const existingUser = await UserSchema.findById(userID)
+    const userId = req.params.id
+    const existingUser = await UserSchema.findById(mongoose.ObjectId(userId))
     if (existingUser) {
         existingUser.email = req.body.email,
         existingUser.firstName = req.body.firstName,
@@ -77,13 +77,20 @@ exports.updateUser = async (req, res) => {
 }
 
 exports.viewUser = async (req, res) => {
-    const userID = req.params.id
-    const existingUser = await UserSchema.findById(userID)
+  const userId = req.params.id
+
+  try {
+    const existingUser = await UserSchema.findById(userId)
+
     if(existingUser) {
-        res.json(existingUser)
+      return res.json(existingUser)
     } else {
-        console.log({ error: 'Not Found' })
+      return res.status(404).send()
     }
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send()
+  }
 }
 
 //Product Routes
@@ -91,8 +98,8 @@ exports.viewUser = async (req, res) => {
 exports.addCategories = async (req, res) => {
     const category = new CategorySchema(req.body);
     await category.save();
-    res.json(category)
     console.log({ success: 'Category saved' });
+    res.json(category)
 };
 
 exports.getAllProducts = async (req, res) => {
@@ -100,7 +107,7 @@ exports.getAllProducts = async (req, res) => {
     if(!allProducts) {
         res.json({ error: 'Products not found'})
     } else {
-        res.json(allProducts);
+        res.json(allProducts)
     }
 }
 
