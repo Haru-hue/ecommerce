@@ -9,7 +9,6 @@ interface Props {
   name?: string
 }
 
-// User object should be read from context or staticProps
 export const UserCard = ({ availability, imageUrl, name, id, isOwner }: Props) => {
   return (
     <section className={styles.userCard}>

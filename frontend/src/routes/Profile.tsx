@@ -1,61 +1,61 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { FC, Suspense } from 'react'
+import { useLoaderData } from 'react-router-dom'
 
+import { useAuthValues } from 'providers/AuthProvider'
+
+import Loader from 'components/loader'
 import UserCard from 'components/userCard'
-
-import BunnyAvatar from 'assets/images/bunny_avatar.png'
 
 import styles from './Profile.module.scss'
 
-const dummyUser = {
-  availability: 'Mon - Sun (9am - 6pm)',
-  name: 'Mark Smith',
-  imageUrl: BunnyAvatar,
-  id: '129',
-}
+const ProfilePage = () => {
+  const { user } = useAuthValues()
+  const userProfileData: any = useLoaderData()
 
-const Profile = () => {
-  const { userId = '0' } = useParams()
-  // Not the best API but I will improve this in the next commit
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [user, setUser] = useState<null | typeof dummyUser>(null)
-
-  const isOwner = userId > '1'
-
-  useEffect(() => {
-    new Promise((reject, resolve) => {
-      setIsLoading(true)
-      setTimeout(() => {
-        setIsLoading(false)
-        setUser(dummyUser)
-        return resolve(null)
-      }, 2500)
-    })
-  }, [userId])
-
-  if (isLoading) {
-    return <div>Loading profile...</div>
-  }
+  const isOwner = userProfileData._id === user?._id
 
   return (
-    <section className={styles.container}>
-      <div>
-        <UserCard isOwner={isOwner} {...user} />
-      </div>
-      <div className={styles.advertsContainer}>
-        <div className={styles.advertTitle}>
-          <h1 className={styles.advertHeading}>My Adverts</h1>
-        </div>
-        <div className={styles.advertList}>
-          <p className={styles.noAdverts}>
-            There are no adverts yet.
-            <br />
-            Create a new one now!
-          </p>
-        </div>
-      </div>
-    </section>
+    <Suspense fallback={<Loader />}>
+      <Profile isOwner={isOwner} loggedInUser={user} userProfileData={userProfileData} />
+    </Suspense>
   )
 }
 
-export default Profile
+interface Props {
+  isOwner: boolean
+  loggedInUser: any
+  userProfileData: any
+}
+
+const Profile: FC<Props> = ({ isOwner, userProfileData, loggedInUser }) => (
+  <section className={styles.container}>
+    <div>
+      <UserCard isOwner={isOwner} />
+    </div>
+    <div className={styles.advertsContainer}>
+      <div className={styles.advertTitle}>
+        <h1 className={styles.advertHeading}>My Adverts</h1>
+      </div>
+      <div className={styles.advertList}>
+        <p className={styles.noAdverts}>
+          {userProfileData.products.length === 0 ? (
+            <>
+              There are no adverts yet.
+              <br />
+              Create a new one now!
+            </>
+          ) : (
+            <>
+              <br>LIST OF PRODUCTS:</br>
+              {userProfileData.products.map((_: any, index: any) => (
+                <span key={index}> Product {index}</span>
+              ))}
+            </>
+          )}
+        </p>
+      </div>
+    </div>
+  </section>
+)
+
+export default ProfilePage
