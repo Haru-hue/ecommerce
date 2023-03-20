@@ -103,49 +103,58 @@ exports.addCategories = async (req, res) => {
 };
 
 exports.getAllProducts = async (req, res) => {
-    const allProducts = await ProductSchema.find({})
-    if(!allProducts) {
-        res.json({ error: 'Products not found'})
-    } else {
-        res.json(allProducts)
-    }
-}
+  try {
+    const allProducts = await ProductSchema.find({});
+    const totalProducts = await ProductSchema.countDocuments()
+    res.json({ allProducts, totalProducts });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get products" });
+  }
+};
 
 exports.getCategories = async (req, res) => {
-    try {
-      const categories = await ProductSchema.aggregate([
-        {
-          $lookup: {
-            from: "categories",
-            localField: "category",
-            foreignField: "_id",
-            as: "category",
-          },
+  try {
+    const categories = await ProductSchema.aggregate([
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "category",
         },
-        {
-          $unwind: "$category",
+      },
+      {
+        $unwind: "$category",
+      },
+      {
+        $group: {
+          _id: "$category._id",
+          name: { $first: "$category.name" },
+          count: { $sum: 1 },
         },
-        {
-          $group: {
-            _id: "$category._id",
-            name: { $first: "$category.name" },
-            count: { $sum: 1 },
-          },
+      },
+      {
+        $project: {
+          _id: 1,
+          name: "$name",
+          count: 1,
         },
-        {
-          $project: {
-            _id: 0,
-            category: "$name",
-            count: 1,
-          },
+      },
+      {
+        $sort: {
+          _id: 1,
         },
-      ]);
-  
-      res.json(categories);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to get categories" });
-    }
-  };
+      },
+    ]);
+
+    res.json(categories);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get categories" });
+  }
+};
+
+
+
 
 //Add Product
 exports.addProduct = async (req, res) => {
@@ -192,17 +201,14 @@ exports.addProduct = async (req, res) => {
     }
   };
   
-  
-
 //Get Product
-
 exports.getProduct = async (req, res) => {
-    const productId = req.params.id 
-    const existingProduct = await ProductSchema.findById(productId)
-      .populate('category', 'name') // populate category with only the name field
-      .exec();
-  
-    res.json({ existingProduct });
+  const productId = req.params.id 
+  const existingProduct = await ProductSchema.findById(productId)
+    .populate('category', 'name') // populate category with only the name field
+    .exec();
+
+  res.json({ existingProduct });
 }
 
 //Getting Products in a Category

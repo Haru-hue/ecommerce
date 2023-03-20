@@ -1,10 +1,12 @@
 import { useLocation } from 'react-router'
 import { Logo } from 'assets/images'
-
 import Button from './button/index'
-import { ArrowDownIcon, BoltIcon, CircleQuestionIcon, HeartIcon, MagnifyingGlassIcon, TagIcon, UserIcon } from './icons'
+import { BoltIcon, CircleQuestionIcon, HeartIcon, MagnifyingGlassIcon, TagIcon, UserIcon } from './icons'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faRotate } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 
 interface Product {
   _id: string;
@@ -15,14 +17,20 @@ interface Product {
   };
 }
 
+interface Category {
+  _id: string;
+  name: string;
+}
+
 interface SearchBarProps {
   products: Product[];
   onProductSelect: (product: Product) => void;
 }
 
-export default function Navbar({ products, onProductSelect }: SearchBarProps) {
+export default function Navbar({ products }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
@@ -59,8 +67,18 @@ export default function Navbar({ products, onProductSelect }: SearchBarProps) {
     }
   }
 
+  async function getCategories() {
+    try {
+      const response = await axios.get<Category[]>('http://localhost:5000/categories');
+      setCategories(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     getResults();
+    getCategories();
   }, [])
 
   const location = useLocation()
@@ -78,7 +96,7 @@ export default function Navbar({ products, onProductSelect }: SearchBarProps) {
           <form action="" className="d-flex ps-5" role="search">
             <div className="search-field d-flex align-items-center">
               <span className="d-flex align-items-center">
-                <select defaultValue="" name="categories" className="cat-field">
+                <select defaultValue="" name="categories" className="cat-field w-100">
                   <option value="">All Categories</option>
                   <option value="1">Fruits & Vegetables</option>
                   <option value="2">Frozen Seafoods</option>
@@ -94,21 +112,6 @@ export default function Navbar({ products, onProductSelect }: SearchBarProps) {
                 <div className="input-group-text">
                   <MagnifyingGlassIcon />
                 </div>
-                {/* <div className="search-results">
-                  {searchTerm && searchResults
-                    .filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
-                    .map((item) => {
-                      return (
-                        <div key={item._id} className="search-result d-flex py-2 my-1">
-                          <img src={item?.image?.url} alt={item.name} className="img-fluid w-25" />
-                          <div className="search-result-info ps-1 py-3 small d-flex flex-column">
-                            <p>{item.name}</p>
-                            <p>${item.price}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                </div> */}
                 { searchTerm && (
                     <div className="search-results">
                       {searchResults
@@ -125,8 +128,7 @@ export default function Navbar({ products, onProductSelect }: SearchBarProps) {
                         );
                       })}
                     </div>
-                  )
-                }
+                  )}
               </div>
             </div>
           </form>
@@ -157,17 +159,36 @@ export default function Navbar({ products, onProductSelect }: SearchBarProps) {
       </div>
       <nav className="navbar px-5 py-3">
         <div className="shop-navbar d-flex align-items-center justify-content-around">
-          <Button
-            className="shop-toggler fs-5 text-uppercase"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target=""
-            aria-controls=""
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            size="sm">
-            <span className="navbar-toggler-icon"></span> Shop by Category
-          </Button>
+          <div className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <Button
+                className="shop-toggler d-flex align-items-center text-uppercase"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target=""
+                aria-controls=""
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                size="sm">
+                <span className="text-white ps-2 fs-4"><FontAwesomeIcon icon={faBars} /></span>
+                <p className="px-3 m-0 small fw-bold">Shop by Category</p>
+              </Button>
+            </a>
+            <ul className="dropdown-menu w-100">
+              {categories.map((item) => {
+                return (
+                  <Link to={`/category/${item._id}`}>
+                    <li key={item._id} className="dropdown-item">
+                      {item.name}
+                    </li>
+                  </Link>
+                );
+              })}
+              <li><a className="dropdown-item" href="#">Action</a></li>
+              <li><a className="dropdown-item" href="#">Another action</a></li>
+              <li><a className="dropdown-item" href="#">Something else here</a></li>
+            </ul>       
+          </div>
           <h6 className="fw-bold">
             <span>
               <BoltIcon />
@@ -184,7 +205,7 @@ export default function Navbar({ products, onProductSelect }: SearchBarProps) {
         <ul className="navbar-nav">
           <h6 className="d-flex align-items-center fw-bold">
             <span>
-              <ArrowDownIcon />
+              <FontAwesomeIcon icon={faRotate} />
             </span>
             Recently Viewed
           </h6>
