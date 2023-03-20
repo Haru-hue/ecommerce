@@ -1,7 +1,7 @@
 import { FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useGetAuthValues } from 'providers/AuthProvider'
+import { useAuthValues } from 'providers/AuthProvider'
 
 import Button from 'components/button'
 
@@ -26,7 +26,7 @@ interface FormElements extends HTMLFormControlsCollection {
 }
 
 const Register = () => {
-  const { signup } = useGetAuthValues()
+  const { signup } = useAuthValues()
   const navigate = useNavigate()
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {

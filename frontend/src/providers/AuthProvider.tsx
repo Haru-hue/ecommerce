@@ -22,6 +22,7 @@ interface UserMeta {
 }
 
 interface User {
+  _id: string
   email: string
   firstName: string
   lastName: string
@@ -85,11 +86,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export const useGetAuthValues = () => {
+export const useAuthValues = () => {
   const context = useContext(AuthContext)
 
   if (context === undefined) {
-    throw new Error('useGetAuthValues must be used within AuthProvider')
+    throw new Error('useAuthValues must be used within AuthProvider')
   }
 
   return context
