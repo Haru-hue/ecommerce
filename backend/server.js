@@ -3,10 +3,7 @@ const path = require('path')
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
-
 const routes = require('./routes/route');
-const { urlencoded } = require('express');
-require('./models/db')
 
 const app = express()
 const port = process.env.PORT || 5000 
@@ -24,10 +21,10 @@ app.use(sessions({
 }));
 
 app.use(cors());
-app.use(urlencoded({extended: false})); // Configure urlencoded middleware here
-app.use('/', routes);
+ // Configure urlencoded middleware here
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('view engine', 'pug');
+app.use('/', routes);
 
 app.listen(port, () => {
     console.log('listening on port ' + port)
