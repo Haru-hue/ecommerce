@@ -1,4 +1,4 @@
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useAuthValues } from 'providers/AuthProvider'
@@ -25,20 +25,49 @@ interface FormElements extends HTMLFormControlsCollection {
   [SEND_OFFER]: HTMLInputElement
 }
 
+interface FormErrors {
+  [CONFIRM_PASSWORD]?: string | null
+  [EMAIL]?: string | null
+  [FIRST_NAME]?: string | null
+  [LAST_NAME]?: string | null
+  [PASSWORD]?: string | null
+}
+
 const Register = () => {
-  const { signup } = useAuthValues()
   const navigate = useNavigate()
+  const { signup } = useAuthValues()
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [requestError, setRequestError] = useState<string | null>(null)
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    setRequestError(null)
     event.preventDefault()
 
     const formElements = event.currentTarget.elements as FormElements
     const email = formElements[EMAIL].value
     const firstName = formElements[FIRST_NAME].value
     const lastName = formElements[LAST_NAME].value
-    const confirmPassword = formElements[CONFIRM_PASSWORD].value
     const password = formElements[PASSWORD].value
+    const confirmPassword = formElements[CONFIRM_PASSWORD].value
     const sendOffer = formElements[SEND_OFFER].checked
+
+    const formErrors = {
+      [EMAIL]: !email ? 'Email is required' : null,
+      [FIRST_NAME]: !firstName ? 'First name is required' : null,
+      [LAST_NAME]: !lastName ? 'Last name is required' : null,
+      [PASSWORD]: !password ? 'Password is required' : null,
+      [CONFIRM_PASSWORD]: !confirmPassword ? 'Password confirmation is required' : null,
+    }
+
+    if (password !== confirmPassword) {
+      formErrors[CONFIRM_PASSWORD] ??= "Passwords aren't a match"
+    }
+
+    setErrors(formErrors)
+
+    if (Object.values(formErrors).filter(Boolean).length > 0) {
+      return
+    }
 
     signup({
       email,
@@ -46,7 +75,9 @@ const Register = () => {
       lastName,
       password,
       sendOffer,
-    }).then(() => navigate('/login'))
+    })
+      .then(() => navigate('/login'))
+      .catch((error: any) => setRequestError(error.message))
   }
 
   return (
@@ -61,30 +92,35 @@ const Register = () => {
             E-mail address
           </label>
           <input className={styles.input} type="email" name={EMAIL} />
+          {errors[EMAIL] ? <div className={styles.errorMsg}>{errors[EMAIL]}</div> : null}
         </div>
         <div className={styles.inputContainer}>
           <label className={styles.label} htmlFor={FIRST_NAME}>
             First Name
           </label>
           <input className={styles.input} name={FIRST_NAME} />
+          {errors[FIRST_NAME] ? <div className={styles.errorMsg}>{errors[FIRST_NAME]}</div> : null}
         </div>
         <div className={styles.inputContainer}>
           <label className={styles.label} htmlFor={LAST_NAME}>
             Last Name
           </label>
           <input className={styles.input} name={LAST_NAME} />
+          {errors[LAST_NAME] ? <div className={styles.errorMsg}>{errors[LAST_NAME]}</div> : null}
         </div>
         <div className={styles.inputContainer}>
           <label className={styles.label} htmlFor={PASSWORD}>
             Password
           </label>
           <input className={styles.input} type="password" name={PASSWORD} />
+          {errors[PASSWORD] ? <div className={styles.errorMsg}>{errors[PASSWORD]}</div> : null}
         </div>
         <div className={styles.inputContainer}>
           <label className={styles.label} htmlFor={CONFIRM_PASSWORD}>
             Confirm Password
           </label>
           <input className={styles.input} type="password" name={CONFIRM_PASSWORD} />
+          {errors[CONFIRM_PASSWORD] ? <div className={styles.errorMsg}>{errors[CONFIRM_PASSWORD]}</div> : null}
         </div>
         <div className={styles.textContainer}>
           <input className={styles.radioInput} type="checkbox" name={SEND_OFFER} />
@@ -103,6 +139,7 @@ const Register = () => {
           </p>
         </div>
         <div>
+          {requestError ? <div className={styles.errorMsg}>{requestError}</div> : null}
           <Button className={styles.btn} size="lg">
             Register Now
           </Button>
