@@ -37,6 +37,19 @@ interface AuthContextValue {
   user: User | null
 }
 
+const handleResponse = async (response: Response) => {
+  const text = await response.text()
+
+  if (!response.ok) {
+    return Promise.reject({
+      statusCode: response.status,
+      message: JSON.parse(text),
+    })
+  }
+
+  return JSON.parse(text)
+}
+
 const AUTH_KEY = 'farm_hub_auth_key'
 const API_URL = getApiUrl()
 
@@ -59,8 +72,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const logout = useCallback(() => setUser(null), [])
 
   const login = useCallback(({ rememberMe, ...payload }: LoginPayload) => {
-    return fetch(`${API_URL}/login`, { body: JSON.stringify(payload), method: 'POST' })
-      .then(resp => resp.json())
+    return fetch(`${API_URL}/login`, {
+      body: JSON.stringify(payload),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(handleResponse)
       .then(data => {
         setUser(data)
         if (rememberMe) {
@@ -69,8 +88,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       })
   }, [])
 
-  const signup = useCallback((payload: SignupPayload) => {
-    return fetch(`${API_URL}/register`, { body: JSON.stringify(payload), method: 'POST' }).then(() => undefined)
+  const signup = useCallback(async (payload: SignupPayload) => {
+    return fetch(`${API_URL}/register`, {
+      body: JSON.stringify(payload),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(handleResponse)
   }, [])
 
   const value = useMemo(
