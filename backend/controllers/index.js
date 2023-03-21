@@ -206,6 +206,14 @@ exports.getProduct = async (req, res) => {
   const productId = req.params.id 
   const existingProduct = await ProductSchema.findById(productId)
     .populate('category', 'name') // populate category with only the name field
+    .populate({
+      path: 'owner',
+      select: 'firstName lastName',
+      populate: {
+        path: 'meta',
+        select: 'phoneNumber'
+      }
+    }) // populate category with only the name field
     .exec();
 
   res.json({ existingProduct });

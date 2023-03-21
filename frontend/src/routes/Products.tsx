@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import Rating from "components/Rating";
 
 interface Product {
   _id: string;
@@ -15,7 +16,9 @@ interface Product {
     url: string;
   };
   meta: {
-    weight: number;
+    weight: String,
+    ratings: number,
+    reviewsCount: number,
   };
 }
 
@@ -119,15 +122,19 @@ const ShopPage = () => {
               {currentProducts.map((product) => (
                   <div key={product._id} className="card">
                     <Link to={`/products/${product._id}`}>
-
-                      <div className="card-img-top"><img src={product?.image?.url} alt={product.name} className="img-fluid" /></div>
+                      <div className="card-img-top d-flex justify-content-center">
+                        <img src={product?.image?.url} alt={product.name} className="img-fluid d-flex" /></div>
                     </Link>
                     <div className="card-body">
                     <Link to={`/products/${product._id}`}>
-                        <h6 className="card-title fw-bold">{product.name}</h6>
+                        <h6 className="card-title fw-bold fs-5 text-dark">{product.name}</h6>
                       </Link>
-                      <p className="card-text small">{product.meta.weight}</p>
-                      <p className="card-text fw-bold text-green">₦ {product.price.toLocaleString()}</p>
+                      <div className="d-flex align-items-center">
+                        <Rating stars={product.meta.ratings}/>
+                        <p className="small text-muted m-0 ps-1">({product.meta.reviewsCount})</p>
+                      </div>
+                      <p className="card-text small pt-1">{product.meta.weight}</p>
+                      <p className="card-text fw-bold text-green fs-5">₦{product.price.toLocaleString()}.00</p>
                     </div>
                   </div>
               ))}

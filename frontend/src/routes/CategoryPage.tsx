@@ -71,6 +71,24 @@ export default function CategoryPage () {
     return (
     <>
       <Banner/>
+      <div className="d-flex justify-content-between align-items-center mx-5 px-5 pt-5">
+        <h3 className="fw-bold">Shop</h3>
+        <div className="sorting d-flex justify-content-between">
+          <div className="d-flex align-items-center justify-content-between">
+            <p className="fw-bold m-0">Sort by:</p>
+            <select name="" id="" className="text-muted">
+              <option value="">Default sorting</option>
+              <option value="priceL">Sort by price: low to high</option>
+              <option value="priceH">Sort by price: high to low</option>
+            </select>
+          </div>
+          <div className="d-flex align-items-center justify-content-between">
+            <p className="fw-bold m-0">View</p>
+            {/* <Icon icon="material-symbols:grid-on-sharp"  className={`fs-3 ${grid ? 'active' : ''}`} onClick={handleClick}/>
+            <FontAwesomeIcon icon={faList} className={`fs-3 ${!grid ? 'active' : ''}`} onClick={handleClick}/> */}
+          </div>
+        </div>
+      </div>
       <section className="p-5">
         <div className="row p-5">
           <div className="col-lg-3 pe-5">
