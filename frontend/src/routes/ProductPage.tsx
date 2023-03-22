@@ -72,7 +72,7 @@ function ProductPage() {
                   <h1 className="fw-bold">{product.name}</h1>
                   <div className="d-flex">
                     <Rating stars={product.meta.ratings}/>
-                    <p className="text-danger m-0 fw-bold">({product.meta.reviewsCount} reviews)</p>
+                    <p className="text-danger m-0 fw-bold ps-2">({product.meta.reviewsCount} reviews)</p>
                   </div>
                   <h2 className="text-green">₦{product.price}</h2>
                     <div className="d-flex align-items-center text-muted">

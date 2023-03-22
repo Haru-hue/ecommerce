@@ -27,7 +27,7 @@ interface SearchBarProps {
   onProductSelect: (product: Product) => void;
 }
 
-export default function Navbar({ products }: SearchBarProps) {
+export default function Navbar({ products, onProductSelect }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -59,8 +59,8 @@ export default function Navbar({ products }: SearchBarProps) {
 
   async function getResults() {
     try {
-      const response = await axios.get<Product[]>('http://localhost:5000/shop');
-      setSearchResults(response.data);
+      const response = await axios.get<{ allProducts: Product[] }>('http://localhost:5000/shop');
+      setSearchResults(response.data.allProducts);
       console.log(response.data);
     } catch (err) {
       console.log(err);

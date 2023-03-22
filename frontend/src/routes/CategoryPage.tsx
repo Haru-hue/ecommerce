@@ -4,6 +4,8 @@ import { useParams } from "react-router";
 import Pagination from "components/Paginate";
 import { Link } from "react-router-dom";
 import Banner from "components/Banner";
+import { Icon } from "@iconify/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Products {
     _id: string;
