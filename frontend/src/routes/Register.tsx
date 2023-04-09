@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import {
@@ -13,7 +13,7 @@ import {
 } from 'models/RegisterForm'
 
 import { useAuthValues } from 'providers/AuthProvider'
-import { useRegistrationData } from 'providers/RegistrationDataProvider'
+import { useRegistration } from 'providers/RegistrationDataProvider'
 
 import Button from 'components/button'
 
@@ -23,10 +23,14 @@ import styles from './Register.module.scss'
 
 const Register = () => {
   const navigate = useNavigate()
-  const { confirmPassword, email, password } = useRegistrationData()
+  const [{ confirmPassword, email, password }, setRegistrationData] = useRegistration()
   const { signup } = useAuthValues()
   const [errors, setErrors] = useState<RegisterFormErrors>({})
   const [requestError, setRequestError] = useState<string | null>(null)
+
+  useEffect(() => {
+    return () => setRegistrationData({})
+  }, [setRegistrationData])
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     setRequestError(null)

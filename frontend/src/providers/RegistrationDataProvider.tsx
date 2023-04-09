@@ -41,4 +41,11 @@ export const useDispatchRegistrationData = () => {
   return context
 }
 
+export const useRegistration = () => {
+  const data = useRegistrationData()
+  const dispatch = useDispatchRegistrationData()
+
+  return [data, dispatch] as const
+}
+
 export default RegistrationDataProvider
