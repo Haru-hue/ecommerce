@@ -1,56 +1,31 @@
-import { faLocationDot, faStore } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import Rating from "components/Rating";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { faLocationDot, faStore } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import axios from 'axios'
 
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  image: {
-    url: string;
-  };
-  category: {
-    _id: string;
-    name: string;
-  }
-  meta: {
-    weight: String,
-    status: Boolean,
-    location: String,
-    shelfLife: String,
-    ratings: number,
-    reviewsCount: number,
-  }
-  owner: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-  }
-}
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+
+import { Product } from 'models/Product'
+
+import Rating from 'components/Rating'
 
 function ProductPage() {
-  const { id } = useParams<{ id?: string }>();
-  const [product, setProduct] = useState<Product>();
+  const { id } = useParams<{ id?: string }>()
+  const [product, setProduct] = useState<Product>()
 
   async function getProduct(productId: string) {
     try {
-      const { data } = await axios.get<{ existingProduct: Product }>(
-        `http://localhost:5000/products/${productId}`
-      );
-      setProduct(data.existingProduct);
-      console.log(data);
+      const { data } = await axios.get<{ existingProduct: Product }>(`http://localhost:5000/products/${productId}`)
+      setProduct(data.existingProduct)
+      console.log(data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
   useEffect(() => {
-    id && getProduct(id);
-  }, [id]);
+    id && getProduct(id)
+  }, [id])
 
   return (
     <main className="product-page">
@@ -63,40 +38,37 @@ function ProductPage() {
               </div>
               <div className="col-lg-4">
                 <div className="link text-muted">
-                  <a href="#">Home</a> /
-                  <a href="/shop">Shop</a> /
+                  <a href="#">Home</a> /<a href="/shop">Shop</a> /
                   <Link to={`/category/${product.category._id}`}>{product.category.name}</Link>
                   {product.name}
                 </div>
                 <div className="product-desc">
                   <h1 className="fw-bold">{product.name}</h1>
                   <div className="d-flex">
-                    <Rating stars={product.meta.ratings}/>
+                    <Rating stars={product.meta.ratings} />
                     <p className="text-danger m-0 fw-bold ps-2">({product.meta.reviewsCount} reviews)</p>
                   </div>
                   <h2 className="text-green">₦{product.price}</h2>
-                    <div className="d-flex align-items-center text-muted">
-                      <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
-                      <span className="">{product.meta.location}</span>
-                    </div>
-                    <div className="d-flex align-items-center text-muted">
-                      <FontAwesomeIcon icon={faStore} className="mr-2" />
-                      <span className="">{product.meta.shelfLife}</span>
-                    </div>
+                  <div className="d-flex align-items-center text-muted">
+                    <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
+                    <span className="">{product.meta.location}</span>
+                  </div>
+                  <div className="d-flex align-items-center text-muted">
+                    <FontAwesomeIcon icon={faStore} className="mr-2" />
+                    <span className="">{product.meta.shelfLife}</span>
+                  </div>
                 </div>
               </div>
-              <div className="col-lg-3">
-                
-              </div>
+              <div className="col-lg-3"></div>
             </div>
           </div>
         </div>
       )}
     </main>
-  );
+  )
 }
 
-export default ProductPage;
+export default ProductPage
 
 // const ProductPage = () => {
 //   return (
