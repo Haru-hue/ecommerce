@@ -1,3 +1,10 @@
+import { FormEvent } from 'react'
+import { useNavigate } from 'react-router'
+
+import { CONFIRM_PASSWORD, EMAIL, IndexFormElements, PASSWORD } from 'models/RegisterForm'
+
+import { useDispatchRegistrationData } from 'providers/RegistrationDataProvider'
+
 import Button from 'components/button'
 import DealBox from 'components/deal-box'
 import { EnvelopeIcon, LockIcon, RepeatIcon } from 'components/icons'
@@ -12,18 +19,33 @@ const grid = [
   { title: 'Bread and Pastries', image: Bread },
   { title: 'Raw Meats', image: Meat },
 ]
+const categoryGrid = grid.map(item => {
+  return (
+    <div className="d-flex flex-column align-items-center" key={item.title}>
+      <div className="category-img">
+        <img src={item.image} alt={item.title} className="p-4" />
+      </div>
+      <h5 className="pt-3">{item.title}</h5>
+    </div>
+  )
+})
 
 const HomePage = () => {
-  const categoryGrid = grid.map(item => {
-    return (
-      <div className="d-flex flex-column align-items-center" key={item.title}>
-        <div className="category-img">
-          <img src={item.image} alt={item.title} className="p-4" />
-        </div>
-        <h5 className="pt-3">{item.title}</h5>
-      </div>
-    )
-  })
+  const navigate = useNavigate()
+  const setRegistrationData = useDispatchRegistrationData()
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const formElements = event.currentTarget.elements as IndexFormElements
+    setRegistrationData({
+      email: formElements[EMAIL].value,
+      password: formElements[PASSWORD].value,
+      confirmPassword: formElements[CONFIRM_PASSWORD].value,
+    })
+
+    navigate('/register')
+  }
 
   return (
     <main>
@@ -205,26 +227,39 @@ const HomePage = () => {
               <DealBox className="with-bg h-100 d-flex flex-column text-center p-5">
                 <h1 className="red-text fw-bolder">15% OFF</h1>
                 <h4 className="fw-semibold">For new users, sign up for this exclusive promo</h4>
-                <form action="" method="post" className="d-flex flex-column align-items-center">
+                <form onSubmit={onSubmit} method="post" className="d-flex flex-column align-items-center">
                   <div className="input-group py-3">
-                    <span className="input-icon position-relative">
+                    <label className="input-icon position-relative" htmlFor={EMAIL}>
                       <EnvelopeIcon className="position-absolute" size="xl" />
-                    </span>
-                    <input type="email" name="email" placeholder="Email address" className="form-control p-4 w-100" />
+                    </label>
+                    <input
+                      type="email"
+                      id={EMAIL}
+                      name={EMAIL}
+                      placeholder="Email address"
+                      className="form-control p-4 w-100"
+                    />
                   </div>
                   <div className="input-group py-2">
-                    <span className="input-icon position-relative">
+                    <label className="input-icon position-relative" htmlFor={PASSWORD}>
                       <LockIcon className="position-absolute" size="xl" />
-                    </span>
-                    <input type="password" name="password" placeholder="Password" className="form-control p-4 w-100" />
-                  </div>
-                  <div className="input-group py-3">
-                    <span className="input-icon position-relative">
-                      <RepeatIcon className="position-absolute" size="xl" />
-                    </span>
+                    </label>
                     <input
                       type="password"
-                      name="confirm-password"
+                      id={PASSWORD}
+                      name={PASSWORD}
+                      placeholder="Password"
+                      className="form-control p-4 w-100"
+                    />
+                  </div>
+                  <div className="input-group py-3">
+                    <label className="input-icon position-relative" htmlFor={CONFIRM_PASSWORD}>
+                      <RepeatIcon className="position-absolute" size="xl" />
+                    </label>
+                    <input
+                      type="password"
+                      name={CONFIRM_PASSWORD}
+                      id={CONFIRM_PASSWORD}
                       placeholder="Confirm Password"
                       className="form-control p-4 w-100"
                     />
