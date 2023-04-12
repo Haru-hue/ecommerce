@@ -1,56 +1,41 @@
-import axios from "axios";
-import Banner from "components/Banner";
-import Pagination from "components/Paginate";
-import { useEffect, useState } from "react";
-import { Icon } from '@iconify/react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import Rating from "components/Rating";
+import { faList } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Icon } from '@iconify/react'
+import axios from 'axios'
 
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  image: {
-    url: string;
-  };
-  meta: {
-    weight: String,
-    ratings: number,
-    reviewsCount: number,
-  };
-}
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-interface Category {
-  _id: string;
-  name: string;
-  count: number;
-}
+import { Category } from 'models/Category'
+import { Product } from 'models/Product'
+
+import Banner from 'components/Banner'
+import Pagination from 'components/Paginate'
+import Rating from 'components/Rating'
 
 const ShopPage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
   const [productsPerPage] = useState(20)
   const [grid, setGrid] = useState(true)
 
   async function getProducts() {
     try {
-      const response = await axios.get<{ allProducts: Product[]}>('http://localhost:5000/shop');
-      setProducts(response.data.allProducts);
+      const response = await axios.get<{ allProducts: Product[] }>('http://localhost:5000/shop')
+      setProducts(response.data.allProducts)
       console.log(products)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   }
 
   async function getCategories() {
     try {
-      const response = await axios.get<Category[]>('http://localhost:5000/categories');
-      setCategories(response.data);
+      const response = await axios.get<Category[]>('http://localhost:5000/categories')
+      setCategories(response.data)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   }
 
@@ -59,17 +44,17 @@ const ShopPage = () => {
   }
 
   useEffect(() => {
-    getProducts();
-    getCategories();
-  }, []);
+    getProducts()
+    getCategories()
+  }, [])
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const indexOfLastProduct = currentPage * productsPerPage
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
 
   // Change page
   function paginate(pageNumber: number) {
-    setCurrentPage(pageNumber);
+    setCurrentPage(pageNumber)
   }
 
   return (
@@ -88,8 +73,12 @@ const ShopPage = () => {
           </div>
           <div className="d-flex align-items-center justify-content-between">
             <p className="fw-bold m-0">View</p>
-            <Icon icon="material-symbols:grid-on-sharp"  className={`fs-3 ${grid ? 'active' : ''}`} onClick={handleClick}/>
-            <FontAwesomeIcon icon={faList} className={`fs-3 ${!grid ? 'active' : ''}`} onClick={handleClick}/>
+            <Icon
+              icon="material-symbols:grid-on-sharp"
+              className={`fs-3 ${grid ? 'active' : ''}`}
+              onClick={handleClick}
+            />
+            <FontAwesomeIcon icon={faList} className={`fs-3 ${!grid ? 'active' : ''}`} onClick={handleClick} />
           </div>
         </div>
       </div>
@@ -98,57 +87,61 @@ const ShopPage = () => {
           <div className="col-lg-3 pe-5">
             <div className="d-flex flex-column">
               <div className="category-group pb-5">
-              <h4 className="fw-bolder pb-3">All Categories</h4>
-              {categories.map((item) => (
-                <Link to={`/category/${item._id}`}>
-                  <button className="btn-category d-flex mb-2 small b-none py-2 px-3" key={item._id}>
-                    <div className="fw-bold">{item.name}</div> <div className="ps-4 text-muted">{item.count}</div>
-                  </button>
-                </Link>
-              ))}
+                <h4 className="fw-bolder pb-3">All Categories</h4>
+                {categories.map(item => (
+                  <Link to={`/category/${item._id}`}>
+                    <button className="btn-category d-flex mb-2 small b-none py-2 px-3" key={item._id}>
+                      <div className="fw-bold">{item.name}</div> <div className="ps-4 text-muted">{item.count}</div>
+                    </button>
+                  </Link>
+                ))}
               </div>
-                <div className="price-group">
-                  <h4 className="fw-bolder">Price Ranges</h4>
-                  <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
-                  <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
-                  <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
-                  <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
-                  <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
-                </div>
+              <div className="price-group">
+                <h4 className="fw-bolder">Price Ranges</h4>
+                <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
+                <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
+                <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
+                <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
+                <button className="btn-category d-flex mb-2 small b-none py-2 px-3 fw-bold">₦500 - ₦1000</button>
+              </div>
             </div>
           </div>
           <div className="col-lg-9">
             <div className={`${grid ? 'shop-grid' : 'd-flex flex-column'}`}>
-              {currentProducts.map((product) => (
-                  <div key={product._id} className="card">
-                    <Link to={`/products/${product._id}`}>
-                      <div className="card-img-top d-flex justify-content-center">
-                        <img src={product?.image?.url} alt={product.name} className="img-fluid d-flex" /></div>
-                    </Link>
-                    <div className="card-body">
-                    <Link to={`/products/${product._id}`}>
-                        <h6 className="card-title fw-bold fs-5 text-dark">{product.name}</h6>
-                      </Link>
-                      <div className="d-flex align-items-center">
-                        <Rating stars={product.meta.ratings}/>
-                        <p className="small text-muted m-0 ps-1">({product.meta.reviewsCount})</p>
-                      </div>
-                      <p className="card-text small pt-1">{product.meta.weight}</p>
-                      <p className="card-text fw-bold text-green fs-5">₦{product.price.toLocaleString()}.00</p>
+              {currentProducts.map(product => (
+                <div key={product._id} className="card">
+                  <Link to={`/products/${product._id}`}>
+                    <div className="card-img-top d-flex justify-content-center">
+                      <img src={product?.image?.url} alt={product.name} className="img-fluid d-flex" />
                     </div>
+                  </Link>
+                  <div className="card-body">
+                    <Link to={`/products/${product._id}`}>
+                      <h6 className="card-title fw-bold fs-5 text-dark">{product.name}</h6>
+                    </Link>
+                    <div className="d-flex align-items-center">
+                      <Rating stars={product.meta.ratings} />
+                      <p className="small text-muted m-0 ps-1">({product.meta.reviewsCount})</p>
+                    </div>
+                    <p className="card-text small pt-1">{product.meta.weight}</p>
+                    <p className="card-text fw-bold text-green fs-5">₦{product.price.toLocaleString()}.00</p>
                   </div>
+                </div>
               ))}
             </div>
             <div className="container pt-5">
-              <Pagination productsPerPage={productsPerPage} totalProducts={products.length} currentPage={currentPage}  paginate={paginate} />
+              <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={products.length}
+                currentPage={currentPage}
+                paginate={paginate}
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-
-
-export default ShopPage;
+export default ShopPage

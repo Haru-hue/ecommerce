@@ -2,33 +2,9 @@ import { getApiUrl } from 'utils'
 
 import { PropsWithChildren, createContext, useCallback, useContext, useMemo, useState } from 'react'
 
-interface LoginPayload {
-  email: string
-  password: string
-  rememberMe: boolean
-}
-
-interface SignupPayload {
-  email: string
-  firstName: string
-  lastName: string
-  password: string
-  sendOffer: boolean
-}
-
-interface UserMeta {
-  availability: string
-  phoneNumber: string
-}
-
-interface User {
-  _id: string
-  email: string
-  firstName: string
-  lastName: string
-  password: string
-  meta: UserMeta
-}
+import { LoginPayload } from 'models/LoginPayload'
+import { SignupPayload } from 'models/SignupPayload'
+import { User } from 'models/User'
 
 interface AuthContextValue {
   login: (payload: LoginPayload) => Promise<void>

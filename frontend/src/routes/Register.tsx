@@ -1,7 +1,19 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+import {
+  CONFIRM_PASSWORD,
+  EMAIL,
+  FIRST_NAME,
+  LAST_NAME,
+  PASSWORD,
+  RegisterFormElements,
+  RegisterFormErrors,
+  SEND_OFFER,
+} from 'models/RegisterForm'
+
 import { useAuthValues } from 'providers/AuthProvider'
+import { useRegistration } from 'providers/RegistrationDataProvider'
 
 import Button from 'components/button'
 
@@ -9,41 +21,22 @@ import { Logo2 } from 'assets/images'
 
 import styles from './Register.module.scss'
 
-const CONFIRM_PASSWORD = 'confirmPassword'
-const EMAIL = 'email'
-const FIRST_NAME = 'firstName'
-const LAST_NAME = 'lastName'
-const PASSWORD = 'password'
-const SEND_OFFER = 'sendOffer'
-
-interface FormElements extends HTMLFormControlsCollection {
-  [CONFIRM_PASSWORD]: HTMLInputElement
-  [EMAIL]: HTMLInputElement
-  [FIRST_NAME]: HTMLInputElement
-  [LAST_NAME]: HTMLInputElement
-  [PASSWORD]: HTMLInputElement
-  [SEND_OFFER]: HTMLInputElement
-}
-
-interface FormErrors {
-  [CONFIRM_PASSWORD]?: string | null
-  [EMAIL]?: string | null
-  [FIRST_NAME]?: string | null
-  [LAST_NAME]?: string | null
-  [PASSWORD]?: string | null
-}
-
 const Register = () => {
   const navigate = useNavigate()
+  const [{ confirmPassword, email, password }, setRegistrationData] = useRegistration()
   const { signup } = useAuthValues()
-  const [errors, setErrors] = useState<FormErrors>({})
+  const [errors, setErrors] = useState<RegisterFormErrors>({})
   const [requestError, setRequestError] = useState<string | null>(null)
+
+  useEffect(() => {
+    return () => setRegistrationData({})
+  }, [setRegistrationData])
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     setRequestError(null)
     event.preventDefault()
 
-    const formElements = event.currentTarget.elements as FormElements
+    const formElements = event.currentTarget.elements as RegisterFormElements
     const email = formElements[EMAIL].value
     const firstName = formElements[FIRST_NAME].value
     const lastName = formElements[LAST_NAME].value
@@ -77,7 +70,7 @@ const Register = () => {
       sendOffer,
     })
       .then(() => navigate('/login'))
-      .catch((error: any) => setRequestError(error.message))
+      .catch((error: Error) => setRequestError(error.message))
   }
 
   return (
@@ -91,7 +84,7 @@ const Register = () => {
           <label className={styles.label} htmlFor={EMAIL}>
             E-mail address
           </label>
-          <input className={styles.input} type="email" name={EMAIL} />
+          <input className={styles.input} type="email" name={EMAIL} defaultValue={email} />
           {errors[EMAIL] ? <div className={styles.errorMsg}>{errors[EMAIL]}</div> : null}
         </div>
         <div className={styles.inputContainer}>
@@ -112,14 +105,14 @@ const Register = () => {
           <label className={styles.label} htmlFor={PASSWORD}>
             Password
           </label>
-          <input className={styles.input} type="password" name={PASSWORD} />
+          <input className={styles.input} type="password" name={PASSWORD} defaultValue={password} />
           {errors[PASSWORD] ? <div className={styles.errorMsg}>{errors[PASSWORD]}</div> : null}
         </div>
         <div className={styles.inputContainer}>
           <label className={styles.label} htmlFor={CONFIRM_PASSWORD}>
             Confirm Password
           </label>
-          <input className={styles.input} type="password" name={CONFIRM_PASSWORD} />
+          <input className={styles.input} type="password" name={CONFIRM_PASSWORD} defaultValue={confirmPassword} />
           {errors[CONFIRM_PASSWORD] ? <div className={styles.errorMsg}>{errors[CONFIRM_PASSWORD]}</div> : null}
         </div>
         <div className={styles.textContainer}>

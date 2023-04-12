@@ -15,10 +15,4 @@ const User = new mongoose.Schema({
     }]
 })
 
-<<<<<<< Updated upstream
-const UserModel = mongoose.model("User", User)
-
-module.exports = UserModel
-=======
 module.exports = mongoose.model("User", User)
->>>>>>> Stashed changes
